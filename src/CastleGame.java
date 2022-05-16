@@ -8,15 +8,53 @@ public class CastleGame {
         if(difficultyMode.equals("easy"))
         {
             castle =  new String[(int)(Math.random()*3)+1][(int)(Math.random()*3)+1];
+            for(int r = 0; r < castle.length;r++)
+            {
+                for(int c = 0; c < castle[r].length;c++)
+                {
+                    castle[r][c] = "";
+                }
+            }
         }
         if(difficultyMode.equals("normal"))
         {
             castle = new String[(int)(Math.random()*3)+4][(int)(Math.random()*3)+4];
+            for(int r = 0; r < castle.length;r++)
+            {
+                for(int c = 0; c < castle[r].length;c++)
+                {
+                    castle[r][c] = "";
+                }
+            }
         }
         if(difficultyMode.equals("hard"))
         {
             castle = new String[(int)(Math.random()*4)+5][(int)(Math.random()*4)+5];
+            for(int r = 0; r < castle.length;r++)
+            {
+                for(int c = 0; c < castle[r].length;c++)
+                {
+                    castle[r][c] = "";
+                }
+            }
         }
+    }
+
+    private String toString2DArray(String[][] input)
+    {
+        String ret = "";
+        for(int r = 0; r < input.length;r++)
+        {
+            for(int c = 0; c < input[r].length;c++)
+            {
+                ret += "[" + input[r][c] + "]";
+                if(c == input[r].length-1)
+                {
+                    ret += "\n";
+                }
+            }
+        }
+        return ret;
     }
 
     public void play()
@@ -55,20 +93,30 @@ public class CastleGame {
         {
             //player = new Ninja(myNameIs);
         }
-        while(player.getHP() > 0)
-        {
             for(int r = castle.length-1; r >= 0; r--)
             {
                 for(int c = 0; c < castle[r].length; c++)
                 {
-                    castle[r][c] = "0\n/|\\\n/\\";
-                    System.out.println(castle);
+                    if(c == 0) {
+                        castle[r][c] = "\uD83D\uDE0A";
+                    }
+                     if(c > 0)
+                    {
+                        castle[r][c-1] = "";
+                        castle[r][c] = "\uD83D\uDE0A";
+                    }
+                     if(r > 0 && c == 0)
+                    {
+                        castle[r-1][castle[r-1].length-1] = "";
+                    }
                 }
             }
-        }
+        System.out.print(toString2DArray(castle));
         if(player.getHP() == 0)
         {
             System.out.println("DECEASED!");
         }
     }
+
+
 }
