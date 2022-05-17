@@ -1,6 +1,8 @@
 import java.util.Scanner;
 public class CastleGame {
     private String[][] castle;
+    private int currentfL;
+    private int currentRoom;
     private Archetype player;
 
     public CastleGame(String difficultyMode)
@@ -8,42 +10,25 @@ public class CastleGame {
         if(difficultyMode.equals("easy"))
         {
             castle =  new String[(int)(Math.random()*3)+1][(int)(Math.random()*3)+1];
-            for(int r = 0; r < castle.length;r++)
-            {
-                for(int c = 0; c < castle[r].length;c++)
-                {
-                    castle[r][c] = "";
-                }
-            }
+            clearArray();
+
         }
         if(difficultyMode.equals("normal"))
         {
             castle = new String[(int)(Math.random()*3)+4][(int)(Math.random()*3)+4];
-            for(int r = 0; r < castle.length;r++)
-            {
-                for(int c = 0; c < castle[r].length;c++)
-                {
-                    castle[r][c] = "";
-                }
-            }
+            clearArray();
         }
         if(difficultyMode.equals("hard"))
         {
             castle = new String[(int)(Math.random()*4)+5][(int)(Math.random()*4)+5];
-            for(int r = 0; r < castle.length;r++)
-            {
-                for(int c = 0; c < castle[r].length;c++)
-                {
-                    castle[r][c] = "";
-                }
-            }
+            clearArray();
         }
     }
 
     private String toString2DArray(String[][] input)
     {
         String ret = "";
-        for(int r = 0; r < input.length;r++)
+        for(int r = input.length-1; r >= 0;r--)
         {
             for(int c = 0; c < input[r].length;c++)
             {
@@ -55,6 +40,27 @@ public class CastleGame {
             }
         }
         return ret;
+    }
+
+    private void clearArray()
+    {
+        for(int r = 0; r < castle.length;r++)
+        {
+            for(int c = 0; c < castle[r].length;c++)
+            {
+                castle[r][c] = "";
+            }
+        }
+    }
+
+    private void nextRoom()
+    {
+        currentRoom++;
+    }
+
+    private void nextFloor()
+    {
+        currentfL++;
     }
 
     public void play()
@@ -93,29 +99,26 @@ public class CastleGame {
         {
             //player = new Ninja(myNameIs);
         }
-            for(int r = castle.length-1; r >= 0; r--)
-            {
-                for(int c = 0; c < castle[r].length; c++)
-                {
-                    if(c == 0) {
-                        castle[r][c] = "\uD83D\uDE0A";
-                    }
-                     if(c > 0)
-                    {
-                        castle[r][c-1] = "";
-                        castle[r][c] = "\uD83D\uDE0A";
-                    }
-                     if(r > 0 && c == 0)
-                    {
-                        castle[r-1][castle[r-1].length-1] = "";
-                    }
-                }
-            }
-        System.out.print(toString2DArray(castle));
+        displayMap();
         if(player.getHP() == 0)
         {
             System.out.println("DECEASED!");
         }
+    }
+
+    private void displayMap()
+    {
+        clearArray();
+        for(int r = castle.length-1; r >= currentfL; r--)
+        {
+            for(int c = 0; c <= currentRoom; c++)
+            {
+                if(c == currentRoom && r == currentfL) {
+                    castle[r][c] = "\uD83E\uDDD2";
+                }
+            }
+       }
+        System.out.print(toString2DArray(castle));
     }
 
 
