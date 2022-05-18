@@ -1,6 +1,7 @@
 import java.util.Scanner;
 public class CastleGame {
-    private String[][] castle;
+    private String[][] castleDisplay;
+    private Room[][] castleRooms;
     private int currentfL;
     private int currentRoom;
     private Archetype player;
@@ -9,19 +10,34 @@ public class CastleGame {
     {
         if(difficultyMode.equals("easy"))
         {
-            castle =  new String[(int)(Math.random()*3)+1][(int)(Math.random()*3)+1];
-            clearArray();
+            int random = (int)(Math.random()*3)+3;
+            castleDisplay =  new String[random][random];
+            castleRooms = new Room[random][random];
+            setCastleRooms();
+            adjustArray();
+            currentfL = castleRooms.length - 1;
+            currentRoom = 0;
 
         }
         if(difficultyMode.equals("normal"))
         {
-            castle = new String[(int)(Math.random()*3)+4][(int)(Math.random()*3)+4];
-            clearArray();
+            int random = (int)(Math.random()*3)+4;
+            castleDisplay = new String[random][random];
+            castleRooms = new Room[random][random];
+            setCastleRooms();
+            adjustArray();
+            currentfL = castleRooms.length - 1;
+            currentRoom = 0;
         }
         if(difficultyMode.equals("hard"))
         {
-            castle = new String[(int)(Math.random()*4)+5][(int)(Math.random()*4)+5];
-            clearArray();
+            int random = (int)(Math.random()*4)+5;
+            castleDisplay = new String[random][random];
+            castleRooms = new Room[random][random];
+            setCastleRooms();
+            adjustArray();
+            currentfL = castleRooms.length - 1;
+            currentRoom = 0;
         }
     }
 
@@ -42,13 +58,37 @@ public class CastleGame {
         return ret;
     }
 
-    private void clearArray()
+    private void setCastleRooms()
     {
-        for(int r = 0; r < castle.length;r++)
+        for(int r = 0; r < castleRooms.length;r++)
         {
-            for(int c = 0; c < castle[r].length;c++)
+            for(int c = 0; c < castleRooms[r].length;c++)
             {
-                castle[r][c] = "";
+                if(c != castleRooms[r].length - 1)
+                {
+                    castleRooms[r][c] = new Room((int)(Math.random()*3));
+                }
+                else
+                {
+                    castleRooms[r][c] = new Room(3);
+                }
+            }
+        }
+    }
+
+    private void adjustArray()
+    {
+        for(int r = castleDisplay.length-1; r >= 0;r--)
+        {
+            for(int c = 0; c < castleDisplay[r].length;c++)
+            {
+                if(r <= currentfL && c < currentRoom)
+                {
+                    castleDisplay[r][c] = "✅";
+                }
+                else {
+                    castleDisplay[r][c] = "❌";
+                }
             }
         }
     }
@@ -81,25 +121,31 @@ public class CastleGame {
             if(archo.equals("Drunkard"))
             {
                 player = new Drunkard(myNameIs);
+                System.out.println("");
             }
             if(archo.equals("Cannoneer"))
             {
                 player = new Cannoneer(myNameIs);
+                System.out.println("");
             }
             if(archo.equals("Plunderer"))
             {
                 player = new Plunderer(myNameIs);
+                System.out.println("");
             }
         }
         if(chosenClass.equals("Knight"))
         {
             player = new Knight(myNameIs);
+            System.out.println("");
         }
         if(chosenClass.equals("Ninja"))
         {
             //player = new Ninja(myNameIs);
         }
         displayMap();
+        displayEvent();
+        displayInventory();
         if(player.getHP() == 0)
         {
             System.out.println("DECEASED!");
@@ -108,17 +154,29 @@ public class CastleGame {
 
     private void displayMap()
     {
-        clearArray();
-        for(int r = castle.length-1; r >= currentfL; r--)
+        adjustArray();
+        for(int r = castleDisplay.length-1; r >= currentfL; r--)
         {
             for(int c = 0; c <= currentRoom; c++)
             {
                 if(c == currentRoom && r == currentfL) {
-                    castle[r][c] = "\uD83E\uDDD2";
+                    castleDisplay[r][c] = "\uD83D\uDE00"; //✅ <-- use this for cleared rooms
                 }
             }
        }
-        System.out.print(toString2DArray(castle));
+        System.out.print(toString2DArray(castleDisplay));
+        System.out.println("------------------------------");
+    }
+
+    private void displayEvent()
+    {
+        String roomType = castleRooms[currentRoom][currentfL].getRoomType();
+
+    }
+
+    private void displayInventory()
+    {
+
     }
 
 
