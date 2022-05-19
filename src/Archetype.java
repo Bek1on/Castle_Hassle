@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class Archetype {
     private int hp;
     private int defense;
@@ -6,10 +7,15 @@ public class Archetype {
     private double luck;
     private double critChance;
     private String name;
+    private ArrayList<Item> inventory;
+    private int gold;
+
 
     public Archetype(String playerName)
     {
         name = playerName;
+        inventory = new ArrayList<Item>();
+        gold = 0;
     }
 
     public int getHP()

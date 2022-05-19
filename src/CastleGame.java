@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 public class CastleGame {
     private String[][] castleDisplay;
     private Room[][] castleRooms;
@@ -41,10 +42,10 @@ public class CastleGame {
         }
     }
 
-    private String toString2DArray(String[][] input)
+    public String toString2DArray(String[][] input)
     {
         String ret = "";
-        for(int r = input.length-1; r >= 0;r--)
+        for(int r = 0;r<input.length;r++)
         {
             for(int c = 0; c < input[r].length;c++)
             {
@@ -143,9 +144,7 @@ public class CastleGame {
         {
             //player = new Ninja(myNameIs);
         }
-        displayMap();
-        displayEvent();
-        displayInventory();
+        displayMap();  //<------ GAMEPLAY CODE INSERTION HERE
         if(player.getHP() == 0)
         {
             System.out.println("DECEASED!");
@@ -155,7 +154,7 @@ public class CastleGame {
     private void displayMap()
     {
         adjustArray();
-        for(int r = castleDisplay.length-1; r >= currentfL; r--)
+        for(int r = 0; r < castleRooms.length; r++)
         {
             for(int c = 0; c <= currentRoom; c++)
             {
@@ -168,16 +167,7 @@ public class CastleGame {
         System.out.println("------------------------------");
     }
 
-    private void displayEvent()
-    {
-        String roomType = castleRooms[currentRoom][currentfL].getRoomType();
 
-    }
-
-    private void displayInventory()
-    {
-
-    }
 
 
 }
