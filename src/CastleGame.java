@@ -67,11 +67,14 @@ public class CastleGame {
             {
                 if(c != castleRooms[r].length - 1)
                 {
-                    castleRooms[r][c] = new Room((int)(Math.random()*3));
+                    castleRooms[r][c] = new Room(1);
+                    //castleRooms[r][c] = new Room((int)(Math.random()*3));
                 }
                 else
                 {
-                    castleRooms[r][c] = new Room(3);
+                    castleRooms[r][c] = new Room(1);
+                    //castleRooms[r][c] = new Room(3);
+
                 }
             }
         }
@@ -83,7 +86,7 @@ public class CastleGame {
         {
             for(int c = 0; c < castleDisplay[r].length;c++)
             {
-                if(r <= currentfL && c < currentRoom)
+                if(r >= currentfL && c < currentRoom)
                 {
                     castleDisplay[r][c] = "✅";
                 }
@@ -94,14 +97,23 @@ public class CastleGame {
         }
     }
 
+
+
     private void nextRoom()
     {
-        currentRoom++;
+        if(currentRoom == castleRooms[0].length-1)
+        {
+            currentRoom = 0;
+            nextFloor();
+        }
+        else {
+            currentRoom++;
+        }
     }
 
     private void nextFloor()
     {
-        currentfL++;
+        currentfL--;
     }
 
     public void play()
@@ -144,7 +156,15 @@ public class CastleGame {
         {
             //player = new Ninja(myNameIs);
         }
-        displayMap();  //<------ GAMEPLAY CODE INSERTION HERE
+        while(player.getHP() > 0 || (currentfL != 0 && currentRoom != castleRooms[0].length-1))
+        {
+            displayMap();
+            castleRooms[currentRoom][currentfL].roomAction(player);
+            if(castleRooms[currentRoom][currentfL].getObjectiveCompleted())
+            {
+                nextRoom();
+            }
+        }
         if(player.getHP() == 0)
         {
             System.out.println("DECEASED!");

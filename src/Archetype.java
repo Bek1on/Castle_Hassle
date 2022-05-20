@@ -28,6 +28,15 @@ public class Archetype {
         hp = value;
     }
 
+    public int getGold(){return gold;}
+
+    public void setGold(int value) {gold = value;}
+
+    public void addToInventory(Item added)
+    {
+        inventory.add(added);
+    }
+
     public int getDefense()
     {
         return defense;
