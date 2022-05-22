@@ -5,10 +5,12 @@ public class CastleGame {
     private Room[][] castleRooms;
     private int currentfL;
     private int currentRoom;
+    private String difficulty;
     private Archetype player;
 
     public CastleGame(String difficultyMode)
     {
+        difficulty = difficultyMode;
         if(difficultyMode.equals("easy"))
         {
             int random = (int)(Math.random()*3)+3;
@@ -86,16 +88,38 @@ public class CastleGame {
         {
             for(int c = 0; c < castleDisplay[r].length;c++)
             {
-                if(r >= currentfL && c < currentRoom)
+                if(c >= currentRoom && r <= currentfL)
                 {
-                    castleDisplay[r][c] = "✅";
-                }
-                else {
                     castleDisplay[r][c] = "❌";
                 }
             }
         }
     }
+
+    //if(castleRooms[r][c].getObjectiveCompleted())
+    //                {
+    //                    castleDisplay[r][c] = "✅";
+    //                }
+    //                else {
+    //                    castleDisplay[r][c] = "❌";
+    //                }
+
+    private void displayMap()
+    {
+        adjustArray();
+        for(int r = 0; r < castleRooms.length; r++)
+        {
+            for(int c = 0; c <= currentRoom; c++)
+            {
+                if(c == currentRoom && r == currentfL) {
+                    castleDisplay[r][c] = "\uD83D\uDE00"; //✅ <-- use this for cleared rooms
+                }
+            }
+        }
+        System.out.print(toString2DArray(castleDisplay));
+        System.out.println("------------------------------");
+    }
+
 
 
 
@@ -114,6 +138,16 @@ public class CastleGame {
     private void nextFloor()
     {
         currentfL--;
+    }
+
+    public int getCurrentfL()
+    {
+        return currentfL;
+    }
+
+    public int getCurrentRoom()
+    {
+        return currentRoom;
     }
 
     public void play()
@@ -162,6 +196,7 @@ public class CastleGame {
             castleRooms[currentRoom][currentfL].roomAction(player);
             if(castleRooms[currentRoom][currentfL].getObjectiveCompleted())
             {
+                castleDisplay[currentfL][currentRoom] = "✅";
                 nextRoom();
             }
         }
@@ -171,21 +206,7 @@ public class CastleGame {
         }
     }
 
-    private void displayMap()
-    {
-        adjustArray();
-        for(int r = 0; r < castleRooms.length; r++)
-        {
-            for(int c = 0; c <= currentRoom; c++)
-            {
-                if(c == currentRoom && r == currentfL) {
-                    castleDisplay[r][c] = "\uD83D\uDE00"; //✅ <-- use this for cleared rooms
-                }
-            }
-       }
-        System.out.print(toString2DArray(castleDisplay));
-        System.out.println("------------------------------");
-    }
+
 
 
 

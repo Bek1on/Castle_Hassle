@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.Arrays;
 public class Room {
-    private final static String[] ROOM_TYPES = {"enemy","shop","treasure","boss"};
+    private final String[] ROOM_TYPES = {"enemy","shop","treasure","boss"};
     private String roomType;
     private boolean objectiveCompleted;
 
@@ -56,13 +56,13 @@ public class Room {
             {
                 System.out.println("SEE YA WHENEVER!");
                 setObjectiveCompleted(true);
-
-
             }
 
         }
         if(getRoomType().equals(ROOM_TYPES[0]))
         {
+            Scanner asker = new Scanner(System.in);
+
 
         }
         if(getRoomType().equals(ROOM_TYPES[2]))
