@@ -42,13 +42,19 @@ public class Archetype {
         inventory.add(added);
     }
 
+    public ArrayList<Item> getInventory()
+    {
+        return inventory;
+    }
+
+
     public void displayStats()
     {
         String display = "Inventory\n";
         String stats = "Name: " + getName() + "\nDefense: " + getDefense() + "\nAttack Damage: " + getAttack() + "\nCrit Chance: " + getCritChance() + "\nGold: " + getGold();
         for(int i = 0; i < inventory.size();i++)
         {
-            display += "[" + inventory.get(i) + "]";
+            display += "[" + inventory.get(i).getName() + "]";
         }
         if(display.equals("Inventory\n"))
         {
@@ -58,6 +64,11 @@ public class Archetype {
         {
             System.out.println(display + "\n" + stats + "\n------------------------------");
         }
+    }
+
+    public void useItem()
+    {
+
     }
 
     public int getDefense()

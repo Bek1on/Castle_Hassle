@@ -39,7 +39,7 @@ public class Room {
             }
             if(input.equals("buy")) {
                 String wantedItem = "";
-                while(!isInStore(wantedItem, itemNames))
+                while(!isInArray(wantedItem, itemNames))
                 {
                     System.out.println("WHACHU BUYING!?!\n" + Arrays.toString(itemNames));
                     wantedItem = asker.nextLine();
@@ -80,6 +80,21 @@ public class Room {
                 {
                     duel(player,fightMe);
                 }
+                if(input.equals("item"))
+                {
+                    String itemUsed = "";
+                    String[] currentItems = new String[player.getInventory().size()];
+                    for(int i = 0; i < player.getInventory().size();i++)
+                    {
+                        currentItems[i] = player.getInventory().get(i).getName();
+                    }
+                    while(!isInArray(itemUsed,currentItems))
+                    {
+                        System.out.println("What item do you wish to use?");
+                        itemUsed = asker.nextLine();
+                    }
+
+                }
             }
         }
         if(getRoomType().equals(ROOM_TYPES[2]))
@@ -102,7 +117,7 @@ public class Room {
         return objectiveCompleted;
     }
 
-    private boolean isInStore(String userInput, String[] items)
+    private boolean isInArray(String userInput, String[] items)
     {
         for(int i = 0; i < items.length;i++)
         {
