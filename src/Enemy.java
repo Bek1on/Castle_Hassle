@@ -17,8 +17,48 @@ public class Enemy {
         goldCarried = (int)(Math.random()*41) + 10;
         defense = (int)(Math.random()*71) + 5;
         hp = (int)(Math.random()*91) + 30;
-        evasive = (Math.random()*31) + 20;
+        evasive = (Math.random()*11) + 5;
         isAlive = true;
+    }
+
+    public void attackPlayer(Archetype player, int dmg)
+    {
+        player.setHP(player.getHP()-dmg);
+    }
+
+    public int getHp()
+    {
+        return hp;
+    }
+
+    public void setHp(int value)
+    {
+        hp = value;
+    }
+
+    public int getAttackDmg()
+    {
+        return attackDmg;
+    }
+
+    public int getDefense()
+    {
+        return defense;
+    }
+
+    public double getEvasive()
+    {
+        return evasive;
+    }
+
+    public int getGoldCarried()
+    {
+        return goldCarried;
+    }
+
+    public String getName()
+    {
+        return name;
     }
 
 

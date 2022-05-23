@@ -23,6 +23,11 @@ public class Archetype {
         return hp;
     }
 
+    public void attackEnemy(Enemy killMe,int dmg)
+    {
+        killMe.setHp(killMe.getHp()-dmg);
+    }
+
     public void setHP(int value)
     {
         hp = value;
@@ -35,6 +40,24 @@ public class Archetype {
     public void addToInventory(Item added)
     {
         inventory.add(added);
+    }
+
+    public void displayStats()
+    {
+        String display = "Inventory\n";
+        String stats = "Name: " + getName() + "\nDefense: " + getDefense() + "\nAttack Damage: " + getAttack() + "\nCrit Chance: " + getCritChance() + "\nGold: " + getGold();
+        for(int i = 0; i < inventory.size();i++)
+        {
+            display += "[" + inventory.get(i) + "]";
+        }
+        if(display.equals("Inventory\n"))
+        {
+            System.out.println("You currently have no items!\n" + stats  + "\n------------------------------");
+        }
+        else
+        {
+            System.out.println(display + "\n" + stats + "\n------------------------------");
+        }
     }
 
     public int getDefense()

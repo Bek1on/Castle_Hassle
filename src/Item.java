@@ -1,5 +1,5 @@
 public class Item {
-    private final String[] ITEMS = {"blood","juice","shield","corpse","ant","iron","amulet","scope","cloak","donkey cheese"};
+    private final String[] ITEMS = {"blood","juice","shield","corpse","ant","iron","amulet","scope","cloak","cheese"};
     private final int[] PRICES = {10,15,25,35,45,55,65,75,85,200};
     private String name;
     private int price;

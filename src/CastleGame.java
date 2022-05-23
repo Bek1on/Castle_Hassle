@@ -193,6 +193,7 @@ public class CastleGame {
         while(player.getHP() > 0 || (currentfL != 0 && currentRoom != castleRooms[0].length-1))
         {
             displayMap();
+            player.displayStats();
             castleRooms[currentRoom][currentfL].roomAction(player);
             if(castleRooms[currentRoom][currentfL].getObjectiveCompleted())
             {
@@ -202,7 +203,7 @@ public class CastleGame {
         }
         if(player.getHP() == 0)
         {
-            System.out.println("DECEASED!");
+            System.out.println("YOU ARE DECEASED!");
         }
     }
 
