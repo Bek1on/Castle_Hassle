@@ -4,6 +4,6 @@ public class Pirate extends Archetype{
     {
         super(name);
         setLuck(.3);
-        setCritChance();
+        setCritChance(.15);
     }
 }

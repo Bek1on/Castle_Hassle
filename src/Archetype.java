@@ -67,8 +67,71 @@ public class Archetype {
         }
     }
 
-    public void useItem()
+    public void useItem(String usedItem)
     {
+        for(int i = 0; i < inventory.size();i++)
+        {
+            if(usedItem.equals(inventory.get(i).getName()))
+            {
+                inventory.remove(i);
+                break;
+            }
+        }
+            if(usedItem.equals("blood"))
+            {
+                setHP(getHP() + 40);
+                System.out.println(getName() + " just drank blood to gain 40 HP!");
+            }
+            if(usedItem.equals("juice"))
+            {
+                int hpIncrease = (int)(Math.random()*31) + 25;
+                setHP(getHP() + hpIncrease);
+                System.out.println(getName() + " just drank juice to gain " + hpIncrease + " HP!");
+            }
+            if(usedItem.equals("shield"))
+            {
+                setDefense(getDefense() + 10);
+                System.out.println(getName() + " just used a shield to increase their defense by 10!");
+            }
+            if(usedItem.equals("corpse"))
+            {
+                setHP(getHP() + 60);
+                setEvasive(getEvasive() - 0.05);
+                System.out.println(getName() + " just ate a corpse to gain 60 HP, growing sluggish in the process!");
+            }
+            if(usedItem.equals("ant"))
+            {
+                setAttack(getAttack() + 10);
+                System.out.println(getName() + " just ate an ant to increase their damage by 10!");
+            }
+            if(usedItem.equals("iron"))
+            {
+                setAttack(getAttack() + 20);
+                System.out.println(getName() + " just used a piece of iron to upgrade their weapon, increasing their damage by 20!");
+            }
+            if(usedItem.equals("amulet"))
+            {
+                setLuck(getLuck() + 0.02);
+                System.out.println(getName() + " is feeling lucky!");
+            }
+            if(usedItem.equals("scope"))
+            {
+                setCritChance(getCritChance() + .01);
+                System.out.println(getName() + " just attached a scope to their eyeballs, increasing their chance for a critical strike by 1%!");
+            }
+            if(usedItem.equals("cloak"))
+            {
+                setEvasive(getEvasive() + 0.01);
+                System.out.println(getName() + " is feeling extra light!");
+            }
+            if(usedItem.equals("cheese"))
+            {
+                setHP(getHP() + 20);
+                setDefense(getDefense() + 5);
+                setAttack(getAttack() + 10);
+                setEvasive(getEvasive() - 0.01);
+                System.out.println(getName() + " IS BUFFED!");
+            }
 
     }
 
@@ -117,9 +180,9 @@ public class Archetype {
         return critChance;
     }
 
-    public void setCritChance()
+    public void setCritChance(double value)
     {
-        critChance = luck / 2;
+        critChance = value;
     }
 
     public String getName()

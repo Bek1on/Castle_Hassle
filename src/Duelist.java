@@ -6,6 +6,6 @@ public class Duelist extends Knight{
         setAttack(40);
         setEvasive(.25);
         setLuck(0.0);
-        setCritChance();
+        setCritChance(0);
     }
 }

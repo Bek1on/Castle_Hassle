@@ -13,7 +13,7 @@ public class Item {
             name = ITEMS[9];
             price = PRICES[9];
         }
-        else if(randomItem != 9 && randomPrice < 9)
+        else if(randomItem < 9 && randomPrice < 9)
         {
             name = ITEMS[randomItem];
             price = PRICES[randomPrice];

@@ -71,10 +71,6 @@ public class Room {
             Enemy fightMe = new Enemy();
             System.out.println(fightMe.getName() + " challenges you to a fight!");
             while(fightMe.getHp() > 0) {
-                if(player.getHP() <= 0)
-                {
-                    break;
-                }
                 String input = "";
                 while (!(input.equals("fight") || input.equals("item") || input.equals("special"))) {
                     System.out.println("What's your move?\n-I strike (say \"fight\")\n-I use an item (say \"item\")\n-I use my special (say \"special\")");
@@ -83,26 +79,37 @@ public class Room {
                 if(input.equals("fight"))
                 {
                     duel(player,fightMe);
+                    if(player.getHP() <= 0)
+                    {
+                        break;
+                    }
                 }
                 if(input.equals("item"))
                 {
-                    String itemUsed = "";
-                    String[] currentItems = new String[player.getInventory().size()];
-                    for(int i = 0; i < player.getInventory().size();i++)
+                    if(player.getInventory().size() == 0)
                     {
-                        currentItems[i] = player.getInventory().get(i).getName();
+                        System.out.println("YOU GOT NO ITEMS TO USE");
                     }
-                    while(!isInArray(itemUsed,currentItems))
-                    {
-                        System.out.println("What item do you wish to use?");
-                        System.out.println(Arrays.toString(currentItems));
-                        itemUsed = asker.nextLine();
+                    else {
+                        String itemUsed = "";
+                        String[] currentItems = new String[player.getInventory().size()];
+                        for (int i = 0; i < player.getInventory().size(); i++) {
+                            currentItems[i] = player.getInventory().get(i).getName();
+                        }
+                        while (!isInArray(itemUsed, currentItems)) {
+                            System.out.println("What item do you wish to use?");
+                            System.out.println(Arrays.toString(currentItems));
+                            itemUsed = asker.nextLine();
+                        }
+                        player.useItem(itemUsed);
                     }
                 }
             }
-            System.out.println(fightMe.getName() + " has been slain!\n" + player.getName() + " has received " + fightMe.getGoldCarried() + " gold!");
-            player.setGold(player.getGold() + fightMe.getGoldCarried());
-            setObjectiveCompleted(true);
+            if(fightMe.getHp() <= 0 && player.getHP() > 0) {
+                System.out.println(fightMe.getName() + " has been slain!\n" + player.getName() + " has received " + fightMe.getGoldCarried() + " gold!");
+                player.setGold(player.getGold() + fightMe.getGoldCarried());
+                setObjectiveCompleted(true);
+            }
         }
         if(getRoomType().equals(ROOM_TYPES[2]))
         {
@@ -179,10 +186,6 @@ public class Room {
             Boss bigEnemy = new Boss();
             System.out.println("HERE COMES A BOSS! ITS THE " + bigEnemy.getName());
             while(bigEnemy.getHp() > 0) {
-                if(player.getHP() <= 0)
-                {
-                    break;
-                }
                 String input = "";
                 while (!(input.equals("fight") || input.equals("item") || input.equals("special"))) {
                     System.out.println("What's your move?\n-I strike (say \"fight\")\n-I use an item (say \"item\")\n-I use my special (say \"special\")");
@@ -191,26 +194,37 @@ public class Room {
                 if(input.equals("fight"))
                 {
                     duel(player,bigEnemy);
+                    if(player.getHP() <= 0)
+                    {
+                        break;
+                    }
                 }
                 if(input.equals("item"))
                 {
-                    String itemUsed = "";
-                    String[] currentItems = new String[player.getInventory().size()];
-                    for(int i = 0; i < player.getInventory().size();i++)
+                    if(player.getInventory().size() == 0)
                     {
-                        currentItems[i] = player.getInventory().get(i).getName();
+                        System.out.println("YOU GOT NO ITEMS TO USE");
                     }
-                    while(!isInArray(itemUsed,currentItems))
-                    {
-                        System.out.println("What item do you wish to use?");
-                        System.out.println(Arrays.toString(currentItems));
-                        itemUsed = asker.nextLine();
+                    else {
+                        String itemUsed = "";
+                        String[] currentItems = new String[player.getInventory().size()];
+                        for (int i = 0; i < player.getInventory().size(); i++) {
+                            currentItems[i] = player.getInventory().get(i).getName();
+                        }
+                        while (!isInArray(itemUsed, currentItems)) {
+                            System.out.println("What item do you wish to use?");
+                            System.out.println(Arrays.toString(currentItems));
+                            itemUsed = asker.nextLine();
+                        }
+                        player.useItem(itemUsed);
                     }
                 }
             }
-            System.out.println(bigEnemy.getName() + " has been slain!\n" + player.getName() + " has received " + bigEnemy.getGoldCarried() + " gold!");
-            player.setGold(player.getGold() + bigEnemy.getGoldCarried());
-            setObjectiveCompleted(true);
+            if(bigEnemy.getHp() <= 0 && player.getHP() > 0) {
+                System.out.println(bigEnemy.getName() + " has been slain!\n" + player.getName() + " has received " + bigEnemy.getGoldCarried() + " gold!");
+                player.setGold(player.getGold() + bigEnemy.getGoldCarried());
+                setObjectiveCompleted(true);
+            }
         }
     }
 
@@ -218,6 +232,7 @@ public class Room {
     {
         objectiveCompleted = value;
     }
+
 
     public boolean getObjectiveCompleted()
     {
@@ -249,7 +264,8 @@ public class Room {
                 System.out.println(enemyAttacks);
                 int totalDmg = (int) (killMe.getAttackDmg() * (100.0 / (100.0 + player.getDefense())));
                 killMe.attackPlayer(player, totalDmg);
-                System.out.println(killMe.getName() + " just did " + totalDmg + " damage!\n------------------------------");
+                System.out.println(killMe.getName() + " just did " + totalDmg + " damage!");
+                System.out.println(player.getName() + " now has " + player.getHP() + " HP!\n------------------------------");
             } else {
                 System.out.println(enemyAttacks);
                 System.out.println(" but " + player.getName() + " just dodged!\n------------------------------");
@@ -266,7 +282,8 @@ public class Room {
                 System.out.println(enemyAttacks);
                 int totalDmg = (int) (killMe.getAttackDmg() * (100.0 / (100.0 + player.getDefense())));
                 killMe.attackPlayer(player, totalDmg);
-                System.out.println(killMe.getName() + " just did " + totalDmg + " damage!\n------------------------------");
+                System.out.println(killMe.getName() + " just did " + totalDmg + " damage!");
+                System.out.println(player.getName() + " now has " + player.getHP() + " HP!\n------------------------------");
             } else {
                 System.out.println(enemyAttacks);
                 System.out.println(" but " + player.getName() + " just dodged!\n------------------------------");
@@ -283,7 +300,8 @@ public class Room {
                 System.out.println(player.getName() + " just landed a critical hit!");
             }
             player.attackEnemy(killMe,totalDmg);
-            System.out.println(player.getName() + " just did " + totalDmg + " damage!\n------------------------------");
+            System.out.println(player.getName() + " just did " + totalDmg + " damage!");
+            System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
         }
         else
         {

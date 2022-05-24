@@ -5,22 +5,21 @@ public class CastleGame {
     private Room[][] castleRooms;
     private int currentfL;
     private int currentRoom;
-    private String difficulty;
     private Archetype player;
 
     public CastleGame(String difficultyMode)
     {
-        difficulty = difficultyMode;
         if(difficultyMode.equals("easy"))
         {
             int random = (int)(Math.random()*3)+3;
-            castleDisplay =  new String[random][random];
-            castleRooms = new Room[random][random];
+            //castleDisplay =  new String[random][random];
+            //castleRooms = new Room[random][random];
+            castleDisplay = new String[3][3];
+            castleRooms = new Room[3][3];
             setCastleRooms();
             adjustArray();
             currentfL = castleRooms.length - 1;
             currentRoom = 0;
-
         }
         if(difficultyMode.equals("normal"))
         {
@@ -46,37 +45,30 @@ public class CastleGame {
 
     public String toString2DArray(String[][] input)
     {
+
         String ret = "";
         for(int r = 0;r<input.length;r++)
         {
             for(int c = 0; c < input[r].length;c++)
             {
                 ret += "[" + input[r][c] + "]";
-                if(c == input[r].length-1)
-                {
-                    ret += "\n";
-                }
             }
+            ret += "\n";
         }
         return ret;
+
+
     }
 
     private void setCastleRooms()
     {
-        for(int r = castleRooms.length-1; r >= 0;r--)
+         for(int r = castleRooms.length-1; r >= 0;r--)
         {
-            for(int c = 0; c < castleRooms[r].length;c++)
+            for(int c = 0; c < castleRooms[r].length-1;c++)
             {
-                if(c != castleRooms[r].length - 1)
-                {
-                    castleRooms[r][c] = new Room(2);
-                }
-                else
-                {
-
-                    castleRooms[r][c] = new Room(2);
-                }
+                castleRooms[c][r] = new Room((int)(Math.random()*3));
             }
+            castleRooms[castleRooms[r].length-1][r] = new Room(3);
         }
     }
 
@@ -90,16 +82,16 @@ public class CastleGame {
                 {
                     castleDisplay[r][c] = "❌";
                 }
+
             }
         }
     }
 
 
-
     private void displayMap()
     {
         adjustArray();
-        for(int r = 0; r < castleRooms.length; r++)
+        for(int r = castleDisplay.length-1; r >= 0;r--)
         {
             for(int c = 0; c <= currentRoom; c++)
             {
@@ -148,8 +140,11 @@ public class CastleGame {
         Scanner asker = new Scanner(System.in);
         System.out.println("What is your name?");
         String myNameIs = asker.nextLine(); //chicka chicka slim shady
-        System.out.println("Hello, " + myNameIs + ", what is your class? (Pirate, Knight, Ninja)");
-        String chosenClass = asker.nextLine();
+        String chosenClass = "";
+        while(!(chosenClass.equals("Pirate") || chosenClass.equals("Knight") || (chosenClass.equals("Ninja")))) {
+            System.out.println("Hello, " + myNameIs + ", what is your class? (Pirate, Knight, Ninja)");
+            chosenClass = asker.nextLine();
+        }
         if(chosenClass.equals("Pirate"))
         {
             String archo = "";
@@ -183,12 +178,8 @@ public class CastleGame {
         {
             //player = new Ninja(myNameIs);
         }
-        while((currentfL != 0 && currentRoom != castleRooms[0].length-1))
+        while(player.getHP() > 0 && !(currentfL == 0 && currentRoom == castleRooms[0].length-1))
         {
-            if(player.getHP() <= 0)
-            {
-                break;
-            }
             displayMap();
             player.displayStats();
             castleRooms[currentRoom][currentfL].roomAction(player);
@@ -200,7 +191,7 @@ public class CastleGame {
         }
         if(player.getHP() <= 0)
         {
-            System.out.println("YOU ARE DECEASED!");
+            System.out.println("YOU ARE DECEASED!\n You reached Floor: " + ((castleRooms.length) - getCurrentfL()) + ", Room: " + (getCurrentRoom() + 1));
         }
     }
 
