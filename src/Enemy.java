@@ -40,24 +40,39 @@ public class Enemy {
         return attackDmg;
     }
 
+    public void setAttackDmg(int value){attackDmg = value;}
+
     public int getDefense()
     {
         return defense;
     }
+
+    public void setDefense(int value){defense = value;}
 
     public double getEvasive()
     {
         return evasive;
     }
 
+    public void setEvasive(double value) {evasive = value;}
+
     public int getGoldCarried()
     {
         return goldCarried;
     }
 
+    public void setGoldCarried(int value){goldCarried = value;}
+
     public String getName()
     {
         return name;
+    }
+
+    public void setName(String value) {name = value;}
+
+    public void useSpecial(Archetype player) //overwritten
+    {
+        System.out.println("");
     }
 
 

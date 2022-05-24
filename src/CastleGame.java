@@ -63,20 +63,18 @@ public class CastleGame {
 
     private void setCastleRooms()
     {
-        for(int r = 0; r < castleRooms.length;r++)
+        for(int r = castleRooms.length-1; r >= 0;r--)
         {
             for(int c = 0; c < castleRooms[r].length;c++)
             {
                 if(c != castleRooms[r].length - 1)
                 {
                     castleRooms[r][c] = new Room(2);
-                    //castleRooms[r][c] = new Room((int)(Math.random()*3));
                 }
                 else
                 {
-                    castleRooms[r][c] = new Room(2);
-                    //castleRooms[r][c] = new Room(3);
 
+                    castleRooms[r][c] = new Room(2);
                 }
             }
         }
@@ -185,8 +183,12 @@ public class CastleGame {
         {
             //player = new Ninja(myNameIs);
         }
-        while(player.getHP() > 0 || (currentfL != 0 && currentRoom != castleRooms[0].length-1))
+        while((currentfL != 0 && currentRoom != castleRooms[0].length-1))
         {
+            if(player.getHP() <= 0)
+            {
+                break;
+            }
             displayMap();
             player.displayStats();
             castleRooms[currentRoom][currentfL].roomAction(player);
@@ -196,7 +198,7 @@ public class CastleGame {
                 nextRoom();
             }
         }
-        if(player.getHP() == 0)
+        if(player.getHP() <= 0)
         {
             System.out.println("YOU ARE DECEASED!");
         }

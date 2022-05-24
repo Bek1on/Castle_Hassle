@@ -36,7 +36,6 @@ public class Archetype {
     public int getGold(){return gold;}
 
 
-
     public void setGold(int value) {gold = value;}
 
     public void addToInventory(Item added)

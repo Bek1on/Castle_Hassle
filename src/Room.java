@@ -71,6 +71,10 @@ public class Room {
             Enemy fightMe = new Enemy();
             System.out.println(fightMe.getName() + " challenges you to a fight!");
             while(fightMe.getHp() > 0) {
+                if(player.getHP() <= 0)
+                {
+                    break;
+                }
                 String input = "";
                 while (!(input.equals("fight") || input.equals("item") || input.equals("special"))) {
                     System.out.println("What's your move?\n-I strike (say \"fight\")\n-I use an item (say \"item\")\n-I use my special (say \"special\")");
@@ -94,7 +98,6 @@ public class Room {
                         System.out.println(Arrays.toString(currentItems));
                         itemUsed = asker.nextLine();
                     }
-
                 }
             }
             System.out.println(fightMe.getName() + " has been slain!\n" + player.getName() + " has received " + fightMe.getGoldCarried() + " gold!");
@@ -172,7 +175,42 @@ public class Room {
         }
         if(getRoomType().equals(ROOM_TYPES[3]))
         {
-
+            Scanner asker = new Scanner(System.in);
+            Boss bigEnemy = new Boss();
+            System.out.println("HERE COMES A BOSS! ITS THE " + bigEnemy.getName());
+            while(bigEnemy.getHp() > 0) {
+                if(player.getHP() <= 0)
+                {
+                    break;
+                }
+                String input = "";
+                while (!(input.equals("fight") || input.equals("item") || input.equals("special"))) {
+                    System.out.println("What's your move?\n-I strike (say \"fight\")\n-I use an item (say \"item\")\n-I use my special (say \"special\")");
+                    input = asker.nextLine();
+                }
+                if(input.equals("fight"))
+                {
+                    duel(player,bigEnemy);
+                }
+                if(input.equals("item"))
+                {
+                    String itemUsed = "";
+                    String[] currentItems = new String[player.getInventory().size()];
+                    for(int i = 0; i < player.getInventory().size();i++)
+                    {
+                        currentItems[i] = player.getInventory().get(i).getName();
+                    }
+                    while(!isInArray(itemUsed,currentItems))
+                    {
+                        System.out.println("What item do you wish to use?");
+                        System.out.println(Arrays.toString(currentItems));
+                        itemUsed = asker.nextLine();
+                    }
+                }
+            }
+            System.out.println(bigEnemy.getName() + " has been slain!\n" + player.getName() + " has received " + bigEnemy.getGoldCarried() + " gold!");
+            player.setGold(player.getGold() + bigEnemy.getGoldCarried());
+            setObjectiveCompleted(true);
         }
     }
 
@@ -204,20 +242,37 @@ public class Room {
         String playerAttacks = player.getName() + " attacks!";
         double playerEvade = (Math.random());
         double enemyEvade = (Math.random());
+        boolean enemyIsBoss = killMe instanceof Boss;
         System.out.println(player.getName() + " HP: " + player.getHP() + "\n" + killMe.getName() + " HP: " + killMe.getHp() + "\n");
-        if((1.0-player.getEvasive())< playerEvade)
-        {
-            System.out.println(enemyAttacks);
-            int totalDmg = (int)(killMe.getAttackDmg() * (100.0 / (100.0 + player.getDefense())));
-            killMe.attackPlayer(player,totalDmg);
-            System.out.println(killMe.getName() + " just did " + totalDmg + " damage!\n------------------------------");
+        if(!enemyIsBoss) {
+            if ((1.0 - player.getEvasive()) > playerEvade) {
+                System.out.println(enemyAttacks);
+                int totalDmg = (int) (killMe.getAttackDmg() * (100.0 / (100.0 + player.getDefense())));
+                killMe.attackPlayer(player, totalDmg);
+                System.out.println(killMe.getName() + " just did " + totalDmg + " damage!\n------------------------------");
+            } else {
+                System.out.println(enemyAttacks);
+                System.out.println(" but " + player.getName() + " just dodged!\n------------------------------");
+            }
         }
         else
         {
-            System.out.println(enemyAttacks);
-            System.out.println(" but " + player.getName() + " just dodged!\n------------------------------");
+            double enemyUsesSpecial = (Math.random());
+            if(enemyUsesSpecial >= .85)
+            {
+                killMe.useSpecial(player);
+            }
+            if ((1.0 - player.getEvasive()) > playerEvade) {
+                System.out.println(enemyAttacks);
+                int totalDmg = (int) (killMe.getAttackDmg() * (100.0 / (100.0 + player.getDefense())));
+                killMe.attackPlayer(player, totalDmg);
+                System.out.println(killMe.getName() + " just did " + totalDmg + " damage!\n------------------------------");
+            } else {
+                System.out.println(enemyAttacks);
+                System.out.println(" but " + player.getName() + " just dodged!\n------------------------------");
+            }
         }
-        if((1.0-killMe.getEvasive()) < enemyEvade)
+        if((1.0-killMe.getEvasive()) > enemyEvade)
         {
             System.out.println(playerAttacks);
             int totalDmg = (int)(player.getAttack() * (100.0 / (100.0 + killMe.getDefense())));
