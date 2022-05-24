@@ -69,12 +69,12 @@ public class CastleGame {
             {
                 if(c != castleRooms[r].length - 1)
                 {
-                    castleRooms[r][c] = new Room(0);
+                    castleRooms[r][c] = new Room(2);
                     //castleRooms[r][c] = new Room((int)(Math.random()*3));
                 }
                 else
                 {
-                    castleRooms[r][c] = new Room(0);
+                    castleRooms[r][c] = new Room(2);
                     //castleRooms[r][c] = new Room(3);
 
                 }
@@ -96,13 +96,7 @@ public class CastleGame {
         }
     }
 
-    //if(castleRooms[r][c].getObjectiveCompleted())
-    //                {
-    //                    castleDisplay[r][c] = "✅";
-    //                }
-    //                else {
-    //                    castleDisplay[r][c] = "❌";
-    //                }
+
 
     private void displayMap()
     {

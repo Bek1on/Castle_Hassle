@@ -91,6 +91,7 @@ public class Room {
                     while(!isInArray(itemUsed,currentItems))
                     {
                         System.out.println("What item do you wish to use?");
+                        System.out.println(Arrays.toString(currentItems));
                         itemUsed = asker.nextLine();
                     }
 
@@ -102,7 +103,72 @@ public class Room {
         }
         if(getRoomType().equals(ROOM_TYPES[2]))
         {
-
+            Scanner asker = new Scanner (System.in);
+            System.out.println("LUCKY YOU, YOU JUST WALKED INTO A TREASURE ROOM!");
+            int chestOpened = 0;
+            while(chestOpened != 1 && chestOpened != 2)
+            {
+                System.out.println("IN FRONT OF YOU ARE TWO CHESTS, WHICH ONE DO YOU OPEN? (Say \"1\" or \"2\")");
+                chestOpened = asker.nextInt();
+            }
+            int goldChest = (int)(Math.random()*2)+1;
+            if(chestOpened == 1)
+            {
+                if(goldChest == 1)
+                {
+                    int goldGained = (int)(Math.random()*21) + 10;
+                    double lucky = (Math.random());
+                    if((1 - player.getLuck()) < lucky)
+                    {
+                        System.out.println("You got lucky and found twice the amount of gold!");
+                       goldGained *= 2;
+                       System.out.println(player.getName() +" has received " + goldGained + " gold!");
+                       player.setGold(player.getGold() + goldGained);
+                    }
+                    else
+                    {
+                        System.out.println(player.getName() +" has received " + goldGained + " gold!");
+                        player.setGold(player.getGold() + goldGained);
+                    }
+                    setObjectiveCompleted(true);
+                }
+                else
+                {
+                    Item chestItem = new Item();
+                    System.out.println("You have found a(n) " + chestItem.getName() + "!");
+                    System.out.println("It will be added to your inventory!");
+                    player.addToInventory(chestItem);
+                    setObjectiveCompleted(true);
+                }
+            }
+            if(chestOpened == 2)
+            {
+                if(goldChest == 2)
+                {
+                    int goldGained = (int)(Math.random()*21) + 10;
+                    double lucky = (Math.random());
+                    if((1 - player.getLuck()) < lucky)
+                    {
+                        System.out.println("You got lucky and found twice the amount of gold!");
+                        goldGained *= 2;
+                        System.out.println(player.getName() +" has received " + goldGained + " gold!");
+                        player.setGold(player.getGold() + goldGained);
+                    }
+                    else
+                    {
+                        System.out.println(player.getName() +" has received " + goldGained + " gold!");
+                        player.setGold(player.getGold() + goldGained);
+                    }
+                    setObjectiveCompleted(true);
+                 }
+                {
+                    Item chestItem = new Item();
+                    System.out.println("You have found a(n) " + chestItem.getName() + "!");
+                    System.out.println("It will be added to your inventory!");
+                    player.addToInventory(chestItem);
+                    setObjectiveCompleted(true);
+                }
+            }
         }
         if(getRoomType().equals(ROOM_TYPES[3]))
         {
