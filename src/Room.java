@@ -96,6 +96,9 @@ public class Room {
 
                 }
             }
+            System.out.println(fightMe.getName() + " has been slain!\n" + player.getName() + " has received " + fightMe.getGoldCarried() + " gold!");
+            player.setGold(player.getGold() + fightMe.getGoldCarried());
+            setObjectiveCompleted(true);
         }
         if(getRoomType().equals(ROOM_TYPES[2]))
         {
@@ -131,32 +134,40 @@ public class Room {
 
     private void duel(Archetype player, Enemy killMe)
     {
+        String enemyAttacks = "The " + killMe.getName() + " attacks!";
+        String playerAttacks = player.getName() + " attacks!";
         double playerEvade = (Math.random());
         double enemyEvade = (Math.random());
-        if(player.getEvasive() < playerEvade)
+        System.out.println(player.getName() + " HP: " + player.getHP() + "\n" + killMe.getName() + " HP: " + killMe.getHp() + "\n");
+        if((1.0-player.getEvasive())< playerEvade)
         {
-            int totalDmg = (int)(killMe.getAttackDmg() * (100 / (100 + player.getDefense())));
+            System.out.println(enemyAttacks);
+            int totalDmg = (int)(killMe.getAttackDmg() * (100.0 / (100.0 + player.getDefense())));
             killMe.attackPlayer(player,totalDmg);
-            System.out.println(killMe.getName() + " just did " + totalDmg + " damage!");
+            System.out.println(killMe.getName() + " just did " + totalDmg + " damage!\n------------------------------");
         }
         else
         {
-            System.out.println(player.getName() + " just dodged!");
+            System.out.println(enemyAttacks);
+            System.out.println(" but " + player.getName() + " just dodged!\n------------------------------");
         }
-        if(killMe.getEvasive() < enemyEvade)
+        if((1.0-killMe.getEvasive()) < enemyEvade)
         {
-            int totalDmg = (int)(player.getAttack() * (100 / (100 + killMe.getDefense())));
+            System.out.println(playerAttacks);
+            int totalDmg = (int)(player.getAttack() * (100.0 / (100.0 + killMe.getDefense())));
             double playerCrit = (Math.random());
             if(player.getCritChance() >= playerCrit)
             {
                 totalDmg *= 2;
+                System.out.println(player.getName() + " just landed a critical hit!");
             }
             player.attackEnemy(killMe,totalDmg);
-            System.out.println(player.getName() + " just did " + totalDmg + " damage!");
+            System.out.println(player.getName() + " just did " + totalDmg + " damage!\n------------------------------");
         }
         else
         {
-            System.out.println(killMe.getName() + " just dodged!");
+            System.out.println(playerAttacks);
+            System.out.println(" but " + killMe.getName() + " just dodged!\n------------------------------");
         }
     }
 }

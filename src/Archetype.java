@@ -51,7 +51,7 @@ public class Archetype {
     public void displayStats()
     {
         String display = "Inventory\n";
-        String stats = "Name: " + getName() + "\nDefense: " + getDefense() + "\nAttack Damage: " + getAttack() + "\nCrit Chance: " + getCritChance() + "\nGold: " + getGold();
+        String stats = "Name: " + getName() + "\nHP: " + getHP() + "\nDefense: " + getDefense() + "\nAttack Damage: " + getAttack() + "\nCrit Chance: " + getCritChance() + "\nGold: " + getGold();
         for(int i = 0; i < inventory.size();i++)
         {
             display += "[" + inventory.get(i).getName() + "]";

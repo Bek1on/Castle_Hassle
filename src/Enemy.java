@@ -5,7 +5,6 @@ public class Enemy {
     private int goldCarried;
     private double evasive;
     private String name;
-    private boolean isAlive;
     private final String[] enemyAdjectives = {"Angry","Malicious","Hungry","Foolish","Ratty","Greedy","Goofy","Bleeding","Chill","Evil"};
     private final String[] enemyNames = {"Crab","Demon","Mimic","Rat","Thief","Hooligan","Wraith","Lobster","Serpent","Grunt"};
 
@@ -17,8 +16,8 @@ public class Enemy {
         goldCarried = (int)(Math.random()*41) + 10;
         defense = (int)(Math.random()*71) + 5;
         hp = (int)(Math.random()*91) + 30;
-        evasive = (Math.random()*11) + 5;
-        isAlive = true;
+        evasive = ((int)(Math.random()*21) + 20) / 100.0;
+        attackDmg = (int)(Math.random()*21) + 30;
     }
 
     public void attackPlayer(Archetype player, int dmg)

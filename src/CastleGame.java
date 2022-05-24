@@ -69,12 +69,12 @@ public class CastleGame {
             {
                 if(c != castleRooms[r].length - 1)
                 {
-                    castleRooms[r][c] = new Room(1);
+                    castleRooms[r][c] = new Room(0);
                     //castleRooms[r][c] = new Room((int)(Math.random()*3));
                 }
                 else
                 {
-                    castleRooms[r][c] = new Room(1);
+                    castleRooms[r][c] = new Room(0);
                     //castleRooms[r][c] = new Room(3);
 
                 }
@@ -116,6 +116,7 @@ public class CastleGame {
                 }
             }
         }
+        System.out.println("MAP");
         System.out.print(toString2DArray(castleDisplay));
         System.out.println("------------------------------");
     }
