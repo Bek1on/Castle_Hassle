@@ -1,11 +1,11 @@
 import java.util.Scanner;
-import java.util.ArrayList;
+
 public class CastleGame {
     private String[][] castleDisplay;
     private Room[][] castleRooms;
     private int currentfL;
     private int currentRoom;
-    private Archetype player;
+    private PlayersClass player;
 
     public CastleGame(String difficultyMode)
     {

@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-public class Archetype {
+public class PlayersClass {
     private int hp;
     private int defense;
     private int attackDmg;
@@ -11,7 +11,7 @@ public class Archetype {
     private int gold;
 
 
-    public Archetype(String playerName)
+    public PlayersClass(String playerName)
     {
         name = playerName;
         inventory = new ArrayList<Item>();

@@ -1,4 +1,4 @@
-public class Knight extends Archetype{
+public class Knight extends PlayersClass {
     private boolean isGonnaParry;
 
     public Knight(String name)

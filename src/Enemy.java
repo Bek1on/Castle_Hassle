@@ -16,11 +16,11 @@ public class Enemy {
         goldCarried = (int)(Math.random()*41) + 10;
         defense = (int)(Math.random()*71) + 5;
         hp = (int)(Math.random()*91) + 30;
-        evasive = ((int)(Math.random()*21) + 20) / 100.0;
+        evasive = ((int)(Math.random()*11) + 10) / 100.0;
         attackDmg = (int)(Math.random()*21) + 30;
     }
 
-    public void attackPlayer(Archetype player, int dmg)
+    public void attackPlayer(PlayersClass player, int dmg)
     {
         player.setHP(player.getHP()-dmg);
     }
@@ -70,7 +70,7 @@ public class Enemy {
 
     public void setName(String value) {name = value;}
 
-    public void useSpecial(Archetype player) //overwritten
+    public void useSpecial(PlayersClass player) //overwritten
     {
         System.out.println("");
     }

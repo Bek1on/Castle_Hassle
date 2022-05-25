@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class CastleHassleRunner {
+public class RunsCastleHassle {
     public static void main(String[] args) {
         Scanner asker = new Scanner(System.in);
         String input = "";

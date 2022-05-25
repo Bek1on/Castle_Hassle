@@ -15,7 +15,7 @@ public class Boss extends Enemy{
         bossSpecial = POSSIBLE_SPECIALS[randomSpecial];
     }
 
-    public void useSpecial(Archetype player)
+    public void useSpecial(PlayersClass player)
     {
         if(bossSpecial.equals("Heal"))
         {

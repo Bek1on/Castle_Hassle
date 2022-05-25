@@ -16,7 +16,7 @@ public class Room {
         return roomType;
     }
 
-    public void roomAction(Archetype player)
+    public void roomAction(PlayersClass player)
     {
         if(getRoomType().equals(ROOM_TYPES[1])) {
             Scanner asker = new Scanner(System.in);
@@ -171,6 +171,7 @@ public class Room {
                     }
                     setObjectiveCompleted(true);
                  }
+                else
                 {
                     Item chestItem = new Item();
                     System.out.println("You have found a(n) " + chestItem.getName() + "!");
@@ -251,7 +252,7 @@ public class Room {
         return false;
     }
 
-    private void duel(Archetype player, Enemy killMe)
+    private void duel(PlayersClass player, Enemy killMe)
     {
         String enemyAttacks = "The " + killMe.getName() + " attacks!";
         String playerAttacks = player.getName() + " attacks!";
@@ -265,8 +266,16 @@ public class Room {
                 int totalDmg = (int) (killMe.getAttackDmg() * (100.0 / (100.0 + player.getDefense())));
                 killMe.attackPlayer(player, totalDmg);
                 System.out.println(killMe.getName() + " just did " + totalDmg + " damage!");
-                System.out.println(player.getName() + " now has " + player.getHP() + " HP!\n------------------------------");
-            } else {
+                if(player.getHP() > 0) {
+                    System.out.println(player.getName() + " now has " + player.getHP() + " HP!\n------------------------------");
+                }
+                else
+                {
+                    System.out.println(player.getName() + " has lost the fight!\n------------------------------");
+                }
+            }
+            else
+            {
                 System.out.println(enemyAttacks);
                 System.out.println(" but " + player.getName() + " just dodged!\n------------------------------");
             }
@@ -283,7 +292,13 @@ public class Room {
                 int totalDmg = (int) (killMe.getAttackDmg() * (100.0 / (100.0 + player.getDefense())));
                 killMe.attackPlayer(player, totalDmg);
                 System.out.println(killMe.getName() + " just did " + totalDmg + " damage!");
-                System.out.println(player.getName() + " now has " + player.getHP() + " HP!\n------------------------------");
+                if(player.getHP() > 0) {
+                    System.out.println(player.getName() + " now has " + player.getHP() + " HP!\n------------------------------");
+                }
+                else
+                {
+                    System.out.println(player.getName() + " has lost the fight!\n------------------------------");
+                }
             } else {
                 System.out.println(enemyAttacks);
                 System.out.println(" but " + player.getName() + " just dodged!\n------------------------------");
@@ -301,7 +316,13 @@ public class Room {
             }
             player.attackEnemy(killMe,totalDmg);
             System.out.println(player.getName() + " just did " + totalDmg + " damage!");
-            System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+            if(killMe.getHp() > 0) {
+                System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+            }
+            else
+            {
+                System.out.println(killMe.getName() + " has been defeated!\n------------------------------");
+            }
         }
         else
         {

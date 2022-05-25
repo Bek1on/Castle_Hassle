@@ -1,4 +1,4 @@
-public class Pirate extends Archetype{
+public class Pirate extends PlayersClass {
 
     public Pirate(String name)
     {
