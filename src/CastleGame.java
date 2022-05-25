@@ -176,7 +176,8 @@ public class CastleGame {
         }
         if(chosenClass.equals("Ninja"))
         {
-            //player = new Ninja(myNameIs);
+            player = new Ninja(myNameIs);
+            System.out.println("");
         }
         while(player.getHP() > 0 && !(currentfL == 0 && currentRoom == castleRooms[0].length-1))
         {

@@ -5,7 +5,7 @@ public class Drunkard extends Pirate{
         super(name);
         setHP(185);
         setDefense(75);
-        setAttack(25);
+        setAttack(30);
         setEvasive(.05);
     }
 }

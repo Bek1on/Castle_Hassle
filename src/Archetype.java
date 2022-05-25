@@ -35,6 +35,10 @@ public class Archetype {
 
     public int getGold(){return gold;}
 
+    public void useSpecial(Enemy killMe)
+    {
+        System.out.println("I HAVE NO USE"); //<-- always overwritten
+    }
 
     public void setGold(int value) {gold = value;}
 

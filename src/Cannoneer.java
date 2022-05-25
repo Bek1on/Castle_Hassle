@@ -9,4 +9,9 @@ public class Cannoneer extends Pirate{
         setEvasive(.35);
 
     }
+
+    public void useSpecial(Enemy killMe)
+    {
+        System.out.println(getName() + " whips out a huge cannon and blasts " + killMe.getName() + " with it!");
+    }
 }
