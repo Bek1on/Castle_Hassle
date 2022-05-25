@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 public class RunsCastleHassle {
     public static void main(String[] args) {
         Scanner asker = new Scanner(System.in);
@@ -9,7 +11,5 @@ public class RunsCastleHassle {
         }
         CastleGame game = new CastleGame(input);
         game.play();
-
-
     }
 }

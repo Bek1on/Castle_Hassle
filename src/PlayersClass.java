@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.File;
+import java.io.IOException;
 public class PlayersClass {
     private int hp;
     private int defense;

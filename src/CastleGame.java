@@ -5,17 +5,16 @@ public class CastleGame {
     private Room[][] castleRooms;
     private int currentfL;
     private int currentRoom;
+    private static int totalWins;
     private PlayersClass player;
 
     public CastleGame(String difficultyMode)
     {
         if(difficultyMode.equals("easy"))
         {
-            int random = (int)(Math.random()*3)+3;
-            //castleDisplay =  new String[random][random];
-            //castleRooms = new Room[random][random];
-            castleDisplay = new String[3][3];
-            castleRooms = new Room[3][3];
+            int random = (int)(Math.random()*1)+3;
+            castleDisplay =  new String[random][random];
+            castleRooms = new Room[random][random];
             setCastleRooms();
             adjustArray();
             currentfL = castleRooms.length - 1;
@@ -23,7 +22,7 @@ public class CastleGame {
         }
         if(difficultyMode.equals("normal"))
         {
-            int random = (int)(Math.random()*3)+4;
+            int random = (int)(Math.random()*2)+3;
             castleDisplay = new String[random][random];
             castleRooms = new Room[random][random];
             setCastleRooms();
@@ -33,7 +32,7 @@ public class CastleGame {
         }
         if(difficultyMode.equals("hard"))
         {
-            int random = (int)(Math.random()*4)+5;
+            int random = (int)(Math.random()*3)+3;
             castleDisplay = new String[random][random];
             castleRooms = new Room[random][random];
             setCastleRooms();
@@ -179,7 +178,7 @@ public class CastleGame {
             player = new Ninja(myNameIs);
             System.out.println("");
         }
-        while(player.getHP() > 0 && !(currentfL == 0 && currentRoom == castleRooms[0].length-1))
+        while(player.getHP() > 0 && !(castleRooms[castleRooms[0].length-1][0].getObjectiveCompleted()))
         {
             displayMap();
             player.displayStats();
@@ -194,7 +193,13 @@ public class CastleGame {
         {
             System.out.println("YOU ARE DECEASED!\n You reached Floor: " + ((castleRooms.length) - getCurrentfL()) + ", Room: " + (getCurrentRoom() + 1));
         }
+        if(player.getHP() > 0)
+        {
+            System.out.println("YOU WON!");
+            totalWins++;
+        }
     }
+
 
 
 

@@ -287,21 +287,21 @@ public class Room {
             {
                 killMe.useSpecial(player);
             }
-            if ((1.0 - player.getEvasive()) > playerEvade) {
-                System.out.println(enemyAttacks);
-                int totalDmg = (int) (killMe.getAttackDmg() * (100.0 / (100.0 + player.getDefense())));
-                killMe.attackPlayer(player, totalDmg);
-                System.out.println(killMe.getName() + " just did " + totalDmg + " damage!");
-                if(player.getHP() > 0) {
-                    System.out.println(player.getName() + " now has " + player.getHP() + " HP!\n------------------------------");
+            else {
+                if ((1.0 - player.getEvasive()) > playerEvade) {
+                    System.out.println(enemyAttacks);
+                    int totalDmg = (int) (killMe.getAttackDmg() * (100.0 / (100.0 + player.getDefense())));
+                    killMe.attackPlayer(player, totalDmg);
+                    System.out.println(killMe.getName() + " just did " + totalDmg + " damage!");
+                    if (player.getHP() > 0) {
+                        System.out.println(player.getName() + " now has " + player.getHP() + " HP!\n------------------------------");
+                    } else {
+                        System.out.println(player.getName() + " has lost the fight!\n------------------------------");
+                    }
+                } else {
+                    System.out.println(enemyAttacks);
+                    System.out.println(" but " + player.getName() + " just dodged!\n------------------------------");
                 }
-                else
-                {
-                    System.out.println(player.getName() + " has lost the fight!\n------------------------------");
-                }
-            } else {
-                System.out.println(enemyAttacks);
-                System.out.println(" but " + player.getName() + " just dodged!\n------------------------------");
             }
         }
         if((1.0-killMe.getEvasive()) > enemyEvade)

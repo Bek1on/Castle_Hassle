@@ -15,25 +15,26 @@ public class Boss extends Enemy{
         bossSpecial = POSSIBLE_SPECIALS[randomSpecial];
     }
 
+    @Override
     public void useSpecial(PlayersClass player)
     {
         if(bossSpecial.equals("Heal"))
         {
             int healAmt = (int)(Math.random()*31) + 30;
-            System.out.println(getName() + " used it's special move, Heal, and healed " + healAmt + " HP!");
+            System.out.println(getName() + " used it's special move, Heal, and healed " + healAmt + " HP!\n------------------------------");
             setHp(getHp() + healAmt);
         }
         if(bossSpecial.equals("Crunch"))
         {
             int dmgAmt = (int)(Math.random()*31) + 45;
-            System.out.println(getName() + " used it's special move, Crunch, to deal " + dmgAmt + " damage!");
+            System.out.println(getName() + " used it's special move, Crunch, to deal " + dmgAmt + " damage!\n------------------------------");
             attackPlayer(player,dmgAmt);
         }
         if(bossSpecial.equals("Protein Shake"))
         {
             int adIncrease = (int)(Math.random()*11) + 10;
             int defIncrease = (int)(Math.random()*11) + 10;
-            System.out.println(getName() + " used it's special move, Protein Shake, to increase it's attack damage by " + adIncrease + " and increase it's defense by " + defIncrease + "!");
+            System.out.println(getName() + " used it's special move, Protein Shake, to increase it's attack damage by " + adIncrease + " and increase it's defense by " + defIncrease + "!\n------------------------------");
             setAttackDmg(getAttackDmg() + adIncrease);
             setDefense(getDefense() + defIncrease);
         }
