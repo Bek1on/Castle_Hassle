@@ -1,8 +1,8 @@
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
+
 public class RunsCastleHassle {
     public static void main(String[] args) {
+
         Scanner asker = new Scanner(System.in);
         String input = "";
         while(!(input.equals("easy") || input.equals("normal") || input.equals("hard"))) {

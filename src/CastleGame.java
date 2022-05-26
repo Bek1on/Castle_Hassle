@@ -1,12 +1,14 @@
 import java.util.Scanner;
 
+
 public class CastleGame {
     private String[][] castleDisplay;
     private Room[][] castleRooms;
     private int currentfL;
     private int currentRoom;
-    private static int totalWins;
     private PlayersClass player;
+    private String roomsCompleted;
+
 
     public CastleGame(String difficultyMode)
     {
@@ -119,6 +121,11 @@ public class CastleGame {
         }
     }
 
+    private void setRoomsCompleted(String value)
+    {
+        roomsCompleted = value;
+    }
+
     private void nextFloor()
     {
         currentfL--;
@@ -137,7 +144,7 @@ public class CastleGame {
     public void play()
     {
         Scanner asker = new Scanner(System.in);
-        System.out.println("What is your name?");
+        System.out.println("What will be your character's name??");
         String myNameIs = asker.nextLine(); //chicka chicka slim shady
         String chosenClass = "";
         while(!(chosenClass.equals("Pirate") || chosenClass.equals("Knight") || (chosenClass.equals("Ninja")))) {
@@ -192,18 +199,11 @@ public class CastleGame {
         if(player.getHP() <= 0)
         {
             System.out.println("YOU ARE DECEASED!\n You reached Floor: " + ((castleRooms.length) - getCurrentfL()) + ", Room: " + (getCurrentRoom() + 1));
+            setRoomsCompleted((((castleRooms.length) - getCurrentfL()) * (getCurrentRoom() + 1) - 1) + "");
         }
         if(player.getHP() > 0)
         {
             System.out.println("YOU WON!");
-            totalWins++;
         }
     }
-
-
-
-
-
-
-
 }
