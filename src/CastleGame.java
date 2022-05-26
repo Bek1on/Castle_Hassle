@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -7,42 +10,29 @@ public class CastleGame {
     private int currentfL;
     private int currentRoom;
     private PlayersClass player;
-    private String roomsCompleted;
+    private int roomsCompleted;
+    private String userName;
 
 
-    public CastleGame(String difficultyMode)
+    public CastleGame(UserLogin gameClient)
     {
-        if(difficultyMode.equals("easy"))
-        {
-            int random = (int)(Math.random()*1)+3;
-            castleDisplay =  new String[random][random];
-            castleRooms = new Room[random][random];
-            setCastleRooms();
-            adjustArray();
-            currentfL = castleRooms.length - 1;
-            currentRoom = 0;
+        gameClient.setUpGUI();
+        gameClient.setUpButtonListeners();
+        try{
+            File playerData = new File("src/players.data");
+            playerData.createNewFile();
+            FileWriter inputGet = new FileWriter("src/players.data");
+            inputGet.write(userName + "\n");
+            inputGet.write("" + roomsCompleted);
+            inputGet.close();
         }
-        if(difficultyMode.equals("normal"))
+        catch(IOException io)
         {
-            int random = (int)(Math.random()*2)+3;
-            castleDisplay = new String[random][random];
-            castleRooms = new Room[random][random];
-            setCastleRooms();
-            adjustArray();
-            currentfL = castleRooms.length - 1;
-            currentRoom = 0;
-        }
-        if(difficultyMode.equals("hard"))
-        {
-            int random = (int)(Math.random()*3)+3;
-            castleDisplay = new String[random][random];
-            castleRooms = new Room[random][random];
-            setCastleRooms();
-            adjustArray();
-            currentfL = castleRooms.length - 1;
-            currentRoom = 0;
+            System.out.println("Unable to create file");
+            io.printStackTrace();
         }
     }
+
 
     public String toString2DArray(String[][] input)
     {
@@ -121,7 +111,7 @@ public class CastleGame {
         }
     }
 
-    private void setRoomsCompleted(String value)
+    private void setRoomsCompleted(int value)
     {
         roomsCompleted = value;
     }
@@ -144,6 +134,41 @@ public class CastleGame {
     public void play()
     {
         Scanner asker = new Scanner(System.in);
+        String difficultyMode = "";
+        while(!(difficultyMode.equals("easy") || difficultyMode.equals("normal") || difficultyMode.equals("hard"))) {
+        System.out.println("WELCOME TO CASTLE HASSLE!\nPlease choose your difficulty before proceeding forward! (type \"easy\" for easy mode, \"normal\" for normal mode, and \"hard\" for hard mode)");
+        difficultyMode = asker.nextLine();
+        }
+        if(difficultyMode.equals("easy"))
+        {
+            int random = (int)(Math.random()*1)+3;
+            castleDisplay =  new String[random][random];
+            castleRooms = new Room[random][random];
+            setCastleRooms();
+            adjustArray();
+            currentfL = castleRooms.length - 1;
+            currentRoom = 0;
+        }
+        if(difficultyMode.equals("normal"))
+        {
+            int random = (int)(Math.random()*2)+3;
+            castleDisplay = new String[random][random];
+            castleRooms = new Room[random][random];
+            setCastleRooms();
+            adjustArray();
+            currentfL = castleRooms.length - 1;
+            currentRoom = 0;
+        }
+        if(difficultyMode.equals("hard"))
+        {
+            int random = (int)(Math.random()*3)+3;
+            castleDisplay = new String[random][random];
+            castleRooms = new Room[random][random];
+            setCastleRooms();
+            adjustArray();
+            currentfL = castleRooms.length - 1;
+            currentRoom = 0;
+        }
         System.out.println("What will be your character's name??");
         String myNameIs = asker.nextLine(); //chicka chicka slim shady
         String chosenClass = "";
@@ -199,7 +224,7 @@ public class CastleGame {
         if(player.getHP() <= 0)
         {
             System.out.println("YOU ARE DECEASED!\n You reached Floor: " + ((castleRooms.length) - getCurrentfL()) + ", Room: " + (getCurrentRoom() + 1));
-            setRoomsCompleted((((castleRooms.length) - getCurrentfL()) * (getCurrentRoom() + 1) - 1) + "");
+            setRoomsCompleted((((castleRooms.length) - getCurrentfL()) * (getCurrentRoom() + 1) - 1));
         }
         if(player.getHP() > 0)
         {
