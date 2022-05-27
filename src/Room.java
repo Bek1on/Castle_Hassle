@@ -41,7 +41,13 @@ public class Room {
                 String wantedItem = "";
                 while(!isInArray(wantedItem, itemNames))
                 {
+                    String prices = "";
                     System.out.println("WHACHU BUYING!?!\n" + Arrays.toString(itemNames));
+                    for(int i = 0; i < shopsItems.length;i++)
+                    {
+                        prices += shopsItems[i].getName() + " Price: " + shopsItems[i].getPrice() + "\n";
+                    }
+                    System.out.print(prices);
                     wantedItem = asker.nextLine();
                 }
                 for (int i = 0; i < itemNames.length; i++) {
