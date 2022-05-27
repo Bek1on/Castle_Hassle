@@ -256,6 +256,8 @@ public class CastleGame {
         if(player.getHP() > 0)
         {
             System.out.println("YOU WON!");
+            PlayerAccount saveInfo = new PlayerAccount(userAccount.getUserName(), userAccount.getRoomsCleared() + ((castleRooms.length) - getCurrentfL()) * (getCurrentRoom() + 1));
+            saveInfo.save();
             System.exit(0);
         }
     }

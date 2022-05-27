@@ -96,7 +96,6 @@ public class UserLogin
                             {
                                 if(userName.equals(checkMe))
                                 {
-
                                     roomsCompleted = Integer.parseInt(checkData.nextLine());
                                     PlayerAccount loggedAccount = new PlayerAccount(userName, roomsCompleted);
                                     isIn = true;
@@ -127,7 +126,31 @@ public class UserLogin
                     userName = userInput.getText();
                     roomsCompleted = 0;
                     PlayerAccount newAccount = new PlayerAccount(userName, roomsCompleted);
-                    newAccount.save();
+                    int line = 1;
+                    try {
+                        File test = new File("src/players.data");
+                        Scanner lineReader = new Scanner(test);
+                        while (lineReader.hasNextLine()) {
+                            String checkMe = lineReader.nextLine();
+                            if (line % 2 != 0) {
+                                if (userName.equals(checkMe)) {
+                                    addPlayer = false;
+                                }
+                            }
+                            line++;
+                        }
+                    }
+                    catch(IOException er)
+                    {
+                        System.out.println("Unable to create file");
+                    }
+                    if(addPlayer) {
+                        newAccount.save();
+                    }
+                    else
+                    {
+                        createNewAccountPrompt.setText("This username already exists!");
+                    }
                 }
             }
         };

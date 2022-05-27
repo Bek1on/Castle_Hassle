@@ -1,6 +1,8 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
+import java.util.Scanner;
+
 public class PlayerAccount {
     private String userName;
     private int roomsCleared;
@@ -40,11 +42,13 @@ public class PlayerAccount {
     public void save()
     {
         try{
+
             File playerData = new File("src/players.data");
             playerData.createNewFile();
-            FileWriter fw = new FileWriter("src/players.data");
+            FileWriter fw = new FileWriter("src/players.data",true);
             fw.write(userName + "\n");
             fw.write("" + roomsCleared);
+            fw.write("\n");
             fw.close();
         }
         catch(IOException e)
