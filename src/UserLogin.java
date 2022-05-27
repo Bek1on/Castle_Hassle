@@ -145,7 +145,8 @@ public class UserLogin
                         System.out.println("Unable to create file");
                     }
                     if(addPlayer) {
-                        newAccount.save();
+                        createNewAccountPrompt.setText("Account successfully made!");
+                        //PUT SOLUTION TO SAVING PROBLEM HERE 
                     }
                     else
                     {
