@@ -3,7 +3,7 @@ public class Ninja extends PlayersClass {
     public Ninja(String name)
     {
         super(name);
-        setEvasive(.45);
+        setEvasive(.5);
     }
 
     public void useSpecial() {

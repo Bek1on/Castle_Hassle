@@ -10,30 +10,51 @@ public class CastleGame {
     private int currentfL;
     private int currentRoom;
     private PlayersClass player;
-    private int roomsCompleted;
-    private String userName;
+    private PlayerAccount userAccount;
 
 
-    public CastleGame(UserLogin gameClient)
+
+    public CastleGame(PlayerAccount userAccount)
     {
-        gameClient.setUpGUI();
-        gameClient.setUpButtonListeners();
-        try{
-            File playerData = new File("src/players.data");
-            playerData.createNewFile();
-            FileWriter inputGet = new FileWriter("src/players.data");
-            inputGet.write(userName + "\n");
-            inputGet.write("" + roomsCompleted);
-            inputGet.close();
+        this.userAccount = userAccount;
+        System.out.println("\nWelcome " + userAccount.getUserName() + " ! You've cleared a total of " + userAccount.getRoomsCleared() + " rooms!\n");
+        Scanner asker = new Scanner(System.in);
+        String difficultyMode = "";
+        while(!(difficultyMode.equals("easy") || difficultyMode.equals("normal") || difficultyMode.equals("hard"))) {
+            System.out.println("WELCOME TO CASTLE HASSLE!\nPlease choose your difficulty before proceeding forward! (type \"easy\" for easy mode, \"normal\" for normal mode, and \"hard\" for hard mode)");
+            difficultyMode = asker.nextLine();
         }
-        catch(IOException io)
+        if(difficultyMode.equals("easy"))
         {
-            System.out.println("Unable to create file");
-            io.printStackTrace();
+            int random = (int)(Math.random()*1)+3;
+            castleDisplay =  new String[random][random];
+            castleRooms = new Room[random][random];
+            setCastleRooms();
+            adjustArray();
+            currentfL = castleRooms.length - 1;
+            currentRoom = 0;
+        }
+        if(difficultyMode.equals("normal"))
+        {
+            int random = (int)(Math.random()*2)+3;
+            castleDisplay = new String[random][random];
+            castleRooms = new Room[random][random];
+            setCastleRooms();
+            adjustArray();
+            currentfL = castleRooms.length - 1;
+            currentRoom = 0;
+        }
+        if(difficultyMode.equals("hard"))
+        {
+            int random = (int)(Math.random()*3)+3;
+            castleDisplay = new String[random][random];
+            castleRooms = new Room[random][random];
+            setCastleRooms();
+            adjustArray();
+            currentfL = castleRooms.length - 1;
+            currentRoom = 0;
         }
     }
-
-
     public String toString2DArray(String[][] input)
     {
 
@@ -103,18 +124,16 @@ public class CastleGame {
     {
         if(currentRoom == castleRooms[0].length-1)
         {
+
             currentRoom = 0;
             nextFloor();
         }
         else {
+
             currentRoom++;
         }
     }
 
-    private void setRoomsCompleted(int value)
-    {
-        roomsCompleted = value;
-    }
 
     private void nextFloor()
     {
@@ -131,44 +150,10 @@ public class CastleGame {
         return currentRoom;
     }
 
+
     public void play()
     {
         Scanner asker = new Scanner(System.in);
-        String difficultyMode = "";
-        while(!(difficultyMode.equals("easy") || difficultyMode.equals("normal") || difficultyMode.equals("hard"))) {
-        System.out.println("WELCOME TO CASTLE HASSLE!\nPlease choose your difficulty before proceeding forward! (type \"easy\" for easy mode, \"normal\" for normal mode, and \"hard\" for hard mode)");
-        difficultyMode = asker.nextLine();
-        }
-        if(difficultyMode.equals("easy"))
-        {
-            int random = (int)(Math.random()*1)+3;
-            castleDisplay =  new String[random][random];
-            castleRooms = new Room[random][random];
-            setCastleRooms();
-            adjustArray();
-            currentfL = castleRooms.length - 1;
-            currentRoom = 0;
-        }
-        if(difficultyMode.equals("normal"))
-        {
-            int random = (int)(Math.random()*2)+3;
-            castleDisplay = new String[random][random];
-            castleRooms = new Room[random][random];
-            setCastleRooms();
-            adjustArray();
-            currentfL = castleRooms.length - 1;
-            currentRoom = 0;
-        }
-        if(difficultyMode.equals("hard"))
-        {
-            int random = (int)(Math.random()*3)+3;
-            castleDisplay = new String[random][random];
-            castleRooms = new Room[random][random];
-            setCastleRooms();
-            adjustArray();
-            currentfL = castleRooms.length - 1;
-            currentRoom = 0;
-        }
         System.out.println("What will be your character's name??");
         String myNameIs = asker.nextLine(); //chicka chicka slim shady
         String chosenClass = "";
@@ -202,13 +187,52 @@ public class CastleGame {
         }
         if(chosenClass.equals("Knight"))
         {
-            player = new Knight(myNameIs);
-            System.out.println("");
+            String archo = "";
+            while(!(archo.equals("Duelist") || archo.equals("Heretic") || archo.equals("Archer")))
+            {
+                System.out.println("Choose an archetype!(Duelist, Archer, Heretic)");
+                archo = asker.nextLine();
+            }
+            if(archo.equals("Duelist"))
+            {
+                player = new Duelist(myNameIs);
+                System.out.println("");
+            }
+            if(archo.equals("Heretic"))
+            {
+                player = new Heretic(myNameIs);
+                System.out.println("");
+            }
+            if(archo.equals("Archer"))
+            {
+                player = new Archer(myNameIs);
+                System.out.println("");
+            }
         }
         if(chosenClass.equals("Ninja"))
         {
-            player = new Ninja(myNameIs);
-            System.out.println("");
+            String archo = "";
+            while(!(archo.equals("Enkaku") || archo.equals("Tetsu") || archo.equals("Ronin")))
+            {
+                System.out.println("Choose an archetype!(Enkaku, Tetsu, Ronin)");
+                archo = asker.nextLine();
+            }
+            if(archo.equals("Enkaku"))
+            {
+                player = new Enkaku(myNameIs);
+                System.out.println("");
+            }
+            if(archo.equals("Tetsu"))
+            {
+                player = new Tetsu(myNameIs);
+                System.out.println("");
+            }
+            if(archo.equals("Ronin"))
+            {
+                player = new Ronin(myNameIs);
+                System.out.println("");
+            }
+
         }
         while(player.getHP() > 0 && !(castleRooms[castleRooms[0].length-1][0].getObjectiveCompleted()))
         {
@@ -224,11 +248,15 @@ public class CastleGame {
         if(player.getHP() <= 0)
         {
             System.out.println("YOU ARE DECEASED!\n You reached Floor: " + ((castleRooms.length) - getCurrentfL()) + ", Room: " + (getCurrentRoom() + 1));
-            setRoomsCompleted((((castleRooms.length) - getCurrentfL()) * (getCurrentRoom() + 1) - 1));
+            Scanner lineCheck = new Scanner("src/players.data");
+            PlayerAccount saveInfo = new PlayerAccount(userAccount.getUserName(), userAccount.getRoomsCleared() + ((castleRooms.length) - getCurrentfL()) * (getCurrentRoom() + 1));
+            saveInfo.save();
+            System.exit(0);
         }
         if(player.getHP() > 0)
         {
             System.out.println("YOU WON!");
+            System.exit(0);
         }
     }
 }

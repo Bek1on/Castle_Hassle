@@ -3,16 +3,16 @@ import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import java.awt.Container;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.Scanner;
+
 
 
 public class UserLogin
 {
     private String userName;
-    private String roomsCompleted;
+    private int roomsCompleted;
+    private boolean isLoggedIn;
     private JFrame frame;
     private JLabel label;
     private JLabel createNewAccountPrompt;
@@ -32,7 +32,28 @@ public class UserLogin
         newAccount = new JButton("Create Account");
         width = w;
         height = h;
+        isLoggedIn = false;
     }
+
+
+
+
+    public JFrame getFrame()
+    {
+        return frame;
+    }
+
+    public boolean isLoggedIn()
+    {
+        return isLoggedIn;
+    }
+
+    public void setLoggedIn(boolean value)
+    {
+        isLoggedIn = value;
+    }
+
+
 
     public void setUpGUI()
     {
@@ -41,20 +62,16 @@ public class UserLogin
         cont.setLayout(flow);
         frame.setSize(width,height);
         frame.setTitle("Login Info");
+        createNewAccountPrompt.setBounds(100,100,100,100);
         cont.add(userInput);
         cont.add(label);
         cont.add(login);
         cont.add(newAccount);
         cont.add(createNewAccountPrompt);
-        createNewAccountPrompt.setBounds(100,100,100,100);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
 
-    public String getUserInput()
-    {
-        return userInput.getText();
-    }
 
     public void setUpButtonListeners()
     {
@@ -66,39 +83,51 @@ public class UserLogin
                 Object buttonPressed = event.getSource();
                 if(buttonPressed == login)
                 {
+                    userName = userInput.getText();
+                    boolean isIn = false;
                     try {
                         File test = new File("src/players.data");
-                        FileReader lookAtPlayerData = new FileReader("src/.players.data");
+                        Scanner checkData = new Scanner(test);
                         int line = 1;
-                        int loopVar = 0;
-                        String userName = "";
-                        String roomsCompleted = "";
-                        while((loopVar = lookAtPlayerData.read()) != -1)
+                        while(checkData.hasNextLine())
                         {
-                            String data = "" + ((char)loopVar);
+                            String checkMe = checkData.nextLine();
                             if(line % 2 != 0)
                             {
-                                userName = data;
-                            }
-                            if(line % 2 == 0)
-                            {
-                                roomsCompleted = data;
+                                if(userName.equals(checkMe))
+                                {
+
+                                    roomsCompleted = Integer.parseInt(checkData.nextLine());
+                                    PlayerAccount loggedAccount = new PlayerAccount(userName, roomsCompleted);
+                                    isIn = true;
+                                    setLoggedIn(true);
+                                    frame.setVisible(false);
+                                    if(isLoggedIn())
+                                    {
+                                        CastleGame game = new CastleGame(loggedAccount);
+                                        game.play();
+                                    }
+                                }
                             }
                             line++;
                         }
-
+                        if(!isIn)
+                        {
+                            createNewAccountPrompt.setText("This username doesn't exist!");
+                        }
                     }
                     catch(IOException error)
                     {
-                        createNewAccountPrompt.setText("Username not found!");
+                        System.out.println("FILE CANNOT BE CREATED");
                     }
                 }
                 if(buttonPressed == newAccount)
                 {
-                    getUserInput();
-
-
-
+                    boolean addPlayer = true;
+                    userName = userInput.getText();
+                    roomsCompleted = 0;
+                    PlayerAccount newAccount = new PlayerAccount(userName, roomsCompleted);
+                    newAccount.save();
                 }
             }
         };
