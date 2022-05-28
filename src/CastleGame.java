@@ -248,17 +248,13 @@ public class CastleGame {
         if(player.getHP() <= 0)
         {
             System.out.println("YOU ARE DECEASED!\n You reached Floor: " + ((castleRooms.length) - getCurrentfL()) + ", Room: " + (getCurrentRoom() + 1));
-            Scanner lineCheck = new Scanner("src/players.data");
-            PlayerAccount saveInfo = new PlayerAccount(userAccount.getUserName(), userAccount.getRoomsCleared() + ((castleRooms.length) - getCurrentfL()) * (getCurrentRoom() + 1));
-            saveInfo.save();
-            System.exit(0);
+            userAccount.setRoomsCleared((((castleRooms.length) - getCurrentfL()) * (getCurrentRoom() + 1) - 1) + userAccount.getRoomsCleared());
+
         }
         if(player.getHP() > 0)
         {
             System.out.println("YOU WON!");
-            PlayerAccount saveInfo = new PlayerAccount(userAccount.getUserName(), userAccount.getRoomsCleared() + ((castleRooms.length) - getCurrentfL()) * (getCurrentRoom() + 1));
-            saveInfo.save();
-            System.exit(0);
+            userAccount.setRoomsCleared((((castleRooms.length) - getCurrentfL()) * (getCurrentRoom() + 1) - 1) + userAccount.getRoomsCleared());
         }
     }
 }

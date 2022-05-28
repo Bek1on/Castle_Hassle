@@ -4,15 +4,17 @@ import java.awt.FlowLayout;
 import java.awt.Container;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
 
 public class UserLogin
 {
+    private ArrayList<PlayerAccount> playerAccounts;
+    private PlayerAccount loggedIn;
     private String userName;
     private int roomsCompleted;
-    private boolean isLoggedIn;
     private JFrame frame;
     private JLabel label;
     private JLabel createNewAccountPrompt;
@@ -32,25 +34,7 @@ public class UserLogin
         newAccount = new JButton("Create Account");
         width = w;
         height = h;
-        isLoggedIn = false;
-    }
-
-
-
-
-    public JFrame getFrame()
-    {
-        return frame;
-    }
-
-    public boolean isLoggedIn()
-    {
-        return isLoggedIn;
-    }
-
-    public void setLoggedIn(boolean value)
-    {
-        isLoggedIn = value;
+        load();
     }
 
 
@@ -84,73 +68,33 @@ public class UserLogin
                 if(buttonPressed == login)
                 {
                     userName = userInput.getText();
-                    boolean isIn = false;
-                    try {
-                        File test = new File("src/players.data");
-                        Scanner checkData = new Scanner(test);
-                        int line = 1;
-                        while(checkData.hasNextLine())
-                        {
-                            String checkMe = checkData.nextLine();
-                            if(line % 2 != 0)
-                            {
-                                if(userName.equals(checkMe))
-                                {
-                                    roomsCompleted = Integer.parseInt(checkData.nextLine());
-                                    PlayerAccount loggedAccount = new PlayerAccount(userName, roomsCompleted);
-                                    isIn = true;
-                                    setLoggedIn(true);
-                                    frame.setVisible(false);
-                                    if(isLoggedIn())
-                                    {
-                                        CastleGame game = new CastleGame(loggedAccount);
-                                        game.play();
-                                    }
-                                }
-                            }
-                            line++;
-                        }
-                        if(!isIn)
-                        {
-                            createNewAccountPrompt.setText("This username doesn't exist!");
-                        }
-                    }
-                    catch(IOException error)
+                    if(isAnExistingAccount(userName))
                     {
-                        System.out.println("FILE CANNOT BE CREATED");
+                        frame.setVisible(false);
+                        loggedIn = getPlayerAccount(userName);
+                        CastleGame game = new CastleGame(loggedIn);
+                        game.play();
+                        save();
+                        System.exit(0);
+                    }
+                    else
+                    {
+                        createNewAccountPrompt.setText("Username does not exist!");
                     }
                 }
                 if(buttonPressed == newAccount)
                 {
-                    boolean addPlayer = true;
                     userName = userInput.getText();
                     roomsCompleted = 0;
-                    PlayerAccount newAccount = new PlayerAccount(userName, roomsCompleted);
-                    int line = 1;
-                    try {
-                        File test = new File("src/players.data");
-                        Scanner lineReader = new Scanner(test);
-                        while (lineReader.hasNextLine()) {
-                            String checkMe = lineReader.nextLine();
-                            if (line % 2 != 0) {
-                                if (userName.equals(checkMe)) {
-                                    addPlayer = false;
-                                }
-                            }
-                            line++;
-                        }
-                    }
-                    catch(IOException er)
+                    if(isAnExistingAccount(userName))
                     {
-                        System.out.println("Unable to create file");
-                    }
-                    if(addPlayer) {
-                        createNewAccountPrompt.setText("Account successfully made!");
-                        //PUT SOLUTION TO SAVING PROBLEM HERE 
+                        createNewAccountPrompt.setText("Username already used!");
                     }
                     else
                     {
-                        createNewAccountPrompt.setText("This username already exists!");
+                        PlayerAccount newAccount = new PlayerAccount(userName, roomsCompleted);
+                        playerAccounts.add(newAccount);
+                        createNewAccountPrompt.setText("Account successfully created!");
                     }
                 }
             }
@@ -158,6 +102,75 @@ public class UserLogin
         login.addActionListener(buttonListener);
         newAccount.addActionListener(buttonListener);
     }
+
+    public void load()
+    {
+        try
+        {
+            playerAccounts = new ArrayList<PlayerAccount>();
+            File data = new File("src/players.data");
+            Scanner checkLine = new Scanner(data);
+            while(checkLine.hasNextLine())
+            {
+                String lineOfData = checkLine.nextLine();
+                String[] userInfo = lineOfData.split("\\|");
+                PlayerAccount addThis = new PlayerAccount(userInfo[0],Integer.parseInt(userInfo[1]));
+                playerAccounts.add(addThis);
+            }
+            checkLine.close();
+        }
+        catch(FileNotFoundException error)
+        {
+            playerAccounts = new ArrayList<PlayerAccount>();
+        }
+    }
+
+    public void save()
+    {
+        try {
+
+            File playerData = new File("src/players.data");
+            playerData.createNewFile();
+            FileWriter fw = new FileWriter("src/players.data");
+            String data = "";
+            for (int i = 0; i < playerAccounts.size(); i++) {
+                data = playerAccounts.get(i).getUserName() + "|" + playerAccounts.get(i).getRoomsCleared();
+                fw.write(data + "\n");
+            }
+            fw.close();
+        }
+        catch(IOException e)
+        {
+            System.out.println("Unable to create file");
+            e.printStackTrace();
+        }
+    }
+
+    public boolean isAnExistingAccount(String userName)
+    {
+        for(int i = 0; i < playerAccounts.size();i++)
+        {
+            if(userName.equals(playerAccounts.get(i).getUserName()))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public PlayerAccount getPlayerAccount(String userName)
+    {
+        for(int i = 0; i < playerAccounts.size();i++)
+        {
+            if(userName.equals(playerAccounts.get(i).getUserName()))
+            {
+                return playerAccounts.get(i);
+            }
+        }
+        return null;
+    }
+
+
 
 
 

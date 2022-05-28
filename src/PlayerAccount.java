@@ -1,7 +1,4 @@
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.File;
-import java.util.Scanner;
+
 
 public class PlayerAccount {
     private String userName;
@@ -29,32 +26,11 @@ public class PlayerAccount {
         return roomsCleared;
     }
 
-    public void setUserName(String name)
-    {
-        userName = name;
-    }
 
     public void setRoomsCleared(int roomsCleared)
     {
         this.roomsCleared = roomsCleared;
     }
 
-    public void save()
-    {
-        try{
 
-            File playerData = new File("src/players.data");
-            playerData.createNewFile();
-            FileWriter fw = new FileWriter("src/players.data",true);
-            fw.write(userName + "\n");
-            fw.write("" + roomsCleared);
-            fw.write("\n");
-            fw.close();
-        }
-        catch(IOException e)
-        {
-            System.out.println("Unable to create file");
-            e.printStackTrace();
-        }
-    }
 }
