@@ -25,6 +25,27 @@ public class Enemy {
         player.setHP(player.getHP()-dmg);
     }
 
+    public void duelWithPlayer(PlayersClass player)
+    {
+        String attackPrompt = "";
+        if(hp > 0) {
+            attackPrompt = "The " + name + " attacks!\n";
+            double playerEvadeChance = Math.random();
+            int totalDmg = (int) (getAttackDmg() * (100.0 / (100.0 + player.getDefense())));
+            if ((1.0 - player.getEvasive()) > playerEvadeChance) {
+                attackPlayer(player, totalDmg);
+                attackPrompt += name + " just did " + totalDmg + " damage!\n";
+            } else {
+                attackPrompt += player.getName() + " dodged!\n";
+            }
+            if (player.getHP() > 0) {
+                attackPrompt += player.getName() + " now has " + player.getHP() + " HP!\n";
+            }
+            attackPrompt += "------------------------------\n";
+        }
+        System.out.print(attackPrompt);
+    }
+
     public int getHp()
     {
         return hp;

@@ -38,7 +38,6 @@ public class UserLogin
     }
 
 
-
     public void setUpGUI()
     {
         Container cont = frame.getContentPane();

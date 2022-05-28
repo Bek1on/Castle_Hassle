@@ -258,82 +258,11 @@ public class Room {
         return false;
     }
 
+
+
     private void duel(PlayersClass player, Enemy killMe)
     {
-        String enemyAttacks = "The " + killMe.getName() + " attacks!";
-        String playerAttacks = player.getName() + " attacks!";
-        double playerEvade = (Math.random());
-        double enemyEvade = (Math.random());
-        boolean enemyIsBoss = killMe instanceof Boss;
-        System.out.println(player.getName() + " HP: " + player.getHP() + "\n" + killMe.getName() + " HP: " + killMe.getHp() + "\n");
-        if(!enemyIsBoss) {
-            if ((1.0 - player.getEvasive()) > playerEvade) {
-                System.out.println(enemyAttacks);
-                int totalDmg = (int) (killMe.getAttackDmg() * (100.0 / (100.0 + player.getDefense())));
-                killMe.attackPlayer(player, totalDmg);
-                System.out.println(killMe.getName() + " just did " + totalDmg + " damage!");
-                if(player.getHP() > 0) {
-                    System.out.println(player.getName() + " now has " + player.getHP() + " HP!\n------------------------------");
-                }
-                else
-                {
-                    System.out.println(player.getName() + " has lost the fight!\n------------------------------");
-                }
-            }
-            else
-            {
-                System.out.println(enemyAttacks);
-                System.out.println(" but " + player.getName() + " just dodged!\n------------------------------");
-            }
-        }
-        else
-        {
-            double enemyUsesSpecial = (Math.random());
-            if(enemyUsesSpecial >= .85)
-            {
-                killMe.useSpecial(player);
-            }
-            else {
-                if ((1.0 - player.getEvasive()) > playerEvade) {
-                    System.out.println(enemyAttacks);
-                    int totalDmg = (int) (killMe.getAttackDmg() * (100.0 / (100.0 + player.getDefense())));
-                    killMe.attackPlayer(player, totalDmg);
-                    System.out.println(killMe.getName() + " just did " + totalDmg + " damage!");
-                    if (player.getHP() > 0) {
-                        System.out.println(player.getName() + " now has " + player.getHP() + " HP!\n------------------------------");
-                    } else {
-                        System.out.println(player.getName() + " has lost the fight!\n------------------------------");
-                    }
-                } else {
-                    System.out.println(enemyAttacks);
-                    System.out.println(" but " + player.getName() + " just dodged!\n------------------------------");
-                }
-            }
-        }
-        if((1.0-killMe.getEvasive()) > enemyEvade)
-        {
-            System.out.println(playerAttacks);
-            int totalDmg = (int)(player.getAttack() * (100.0 / (100.0 + killMe.getDefense())));
-            double playerCrit = (Math.random());
-            if(player.getCritChance() >= playerCrit)
-            {
-                totalDmg *= 2;
-                System.out.println(player.getName() + " just landed a critical hit!");
-            }
-            player.attackEnemy(killMe,totalDmg);
-            System.out.println(player.getName() + " just did " + totalDmg + " damage!");
-            if(killMe.getHp() > 0) {
-                System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
-            }
-            else
-            {
-                System.out.println(killMe.getName() + " has been defeated!\n------------------------------");
-            }
-        }
-        else
-        {
-            System.out.println(playerAttacks);
-            System.out.println(" but " + killMe.getName() + " just dodged!\n------------------------------");
-        }
+        player.duelWithEnemy(killMe);
+        killMe.duelWithPlayer(player);
     }
 }

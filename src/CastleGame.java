@@ -11,11 +11,13 @@ public class CastleGame {
     private int currentRoom;
     private PlayersClass player;
     private PlayerAccount userAccount;
+    private int roomsCleared;
 
 
 
     public CastleGame(PlayerAccount userAccount)
     {
+        roomsCleared = 0;
         this.userAccount = userAccount;
         System.out.println("\nWelcome " + userAccount.getUserName() + " ! You've cleared a total of " + userAccount.getRoomsCleared() + " rooms!\n");
         Scanner asker = new Scanner(System.in);
@@ -79,6 +81,7 @@ public class CastleGame {
             for(int c = 0; c < castleRooms[r].length-1;c++)
             {
                 castleRooms[c][r] = new Room((int)(Math.random()*3));
+
             }
             castleRooms[castleRooms[r].length-1][r] = new Room(3);
         }
@@ -124,12 +127,12 @@ public class CastleGame {
     {
         if(currentRoom == castleRooms[0].length-1)
         {
-
+            roomsCleared++;
             currentRoom = 0;
             nextFloor();
         }
         else {
-
+            roomsCleared++;
             currentRoom++;
         }
     }
@@ -248,13 +251,13 @@ public class CastleGame {
         if(player.getHP() <= 0)
         {
             System.out.println("YOU ARE DECEASED!\n You reached Floor: " + ((castleRooms.length) - getCurrentfL()) + ", Room: " + (getCurrentRoom() + 1));
-            userAccount.setRoomsCleared((((castleRooms.length) - getCurrentfL()) * (getCurrentRoom() + 1) - 1) + userAccount.getRoomsCleared());
+            userAccount.setRoomsCleared(roomsCleared + userAccount.getRoomsCleared());
 
         }
         if(player.getHP() > 0)
         {
             System.out.println("YOU WON!");
-            userAccount.setRoomsCleared((((castleRooms.length) - getCurrentfL()) * (getCurrentRoom() + 1) - 1) + userAccount.getRoomsCleared());
+            userAccount.setRoomsCleared(roomsCleared + userAccount.getRoomsCleared());
         }
     }
 }

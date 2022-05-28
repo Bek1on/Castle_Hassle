@@ -31,6 +31,32 @@ public class PlayersClass {
         killMe.setHp(killMe.getHp()-dmg);
     }
 
+    public void duelWithEnemy(Enemy killMe)
+    {
+        String attackPrompt = "";
+        if(hp > 0) {
+             attackPrompt = name + " attacks!\n";
+            double enemyEvadeChance = Math.random();
+            int totalDmg = (int) (getAttack() * (100.0 / (100.0 + killMe.getDefense())));
+            if ((1.0 - killMe.getEvasive()) > killMe.getEvasive()) {
+                double playerCrit = (Math.random());
+                if (getCritChance() >= playerCrit) {
+                    totalDmg *= 2;
+                    attackPrompt += name + " just landed a critical hit!\n";
+                }
+                attackPrompt += name + " just did " + totalDmg + " damage!\n";
+                attackEnemy(killMe, totalDmg);
+            } else {
+                attackPrompt += killMe.getName() + " dodged!\n";
+            }
+            if (killMe.getHp() > 0) {
+                attackPrompt += killMe.getName() + " now has " + killMe.getHp() + " HP!\n";
+            }
+            attackPrompt += "------------------------------\n";
+        }
+        System.out.print(attackPrompt);
+    }
+
     public void setHP(int value)
     {
         hp = value;
