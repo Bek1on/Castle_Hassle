@@ -23,7 +23,7 @@ public class Room {
         return roomType;
     }
 
-    public void roomAction(PlayersClass player)
+    public void roomAction(PlayersCharacter player)
     {
         if(getRoomType().equals(ROOM_TYPES[1])) {
             Scanner asker = new Scanner(System.in);
@@ -377,7 +377,7 @@ public class Room {
         return false;
     }
 
-    private void displayStatsAlongSideEachOther(PlayersClass player, Enemy killMe)
+    private void displayStatsAlongSideEachOther(PlayersCharacter player, Enemy killMe)
     {
         System.out.println("CURRENT STATS");
         System.out.println(player.getName()  + " CURRENT HP: " + player.getHP());
@@ -392,7 +392,7 @@ public class Room {
 
 
 
-    private void duel(PlayersClass player, Enemy killMe)
+    private void duel(PlayersCharacter player, Enemy killMe)
     {
         player.duelWithEnemy(killMe);
         killMe.duelWithPlayer(player);

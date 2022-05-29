@@ -1,4 +1,4 @@
-public class Knight extends PlayersClass {
+public class Knight extends PlayersCharacter {
 
 
     public Knight(String name)

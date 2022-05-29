@@ -16,7 +16,7 @@ public class Boss extends Enemy{
     }
 
     @Override
-    public void useSpecial(PlayersClass player)
+    public void useSpecial(PlayersCharacter player)
     {
         if(bossSpecial.equals("Heal"))
         {
@@ -41,7 +41,7 @@ public class Boss extends Enemy{
     }
 
     @Override
-    public void duelWithPlayer(PlayersClass player) {
+    public void duelWithPlayer(PlayersCharacter player) {
         double specialAbilityChance = Math.random();
         if(specialAbilityChance >= .9 && getHp() > 0)
         {

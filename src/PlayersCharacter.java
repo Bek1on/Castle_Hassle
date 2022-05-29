@@ -1,8 +1,6 @@
 import java.util.ArrayList;
-import java.io.FileWriter;
-import java.io.File;
-import java.io.IOException;
-public class PlayersClass {
+
+public class PlayersCharacter {
     private int hp;
     private int defense;
     private int attackDmg;
@@ -14,7 +12,7 @@ public class PlayersClass {
     private int gold;
 
 
-    public PlayersClass(String playerName)
+    public PlayersCharacter(String playerName)
     {
         name = playerName;
         inventory = new ArrayList<Item>();

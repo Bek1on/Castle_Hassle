@@ -20,12 +20,12 @@ public class Enemy {
         attackDmg = (int)(Math.random()*21) + 30;
     }
 
-    public void attackPlayer(PlayersClass player, int dmg)
+    public void attackPlayer(PlayersCharacter player, int dmg)
     {
         player.setHP(player.getHP()-dmg);
     }
 
-    public void duelWithPlayer(PlayersClass player)
+    public void duelWithPlayer(PlayersCharacter player)
     {
         String attackPrompt = "";
         if(hp > 0) {
@@ -91,7 +91,7 @@ public class Enemy {
 
     public void setName(String value) {name = value;}
 
-    public void useSpecial(PlayersClass player) //overwritten
+    public void useSpecial(PlayersCharacter player) //overwritten
     {
         System.out.println("");
     }

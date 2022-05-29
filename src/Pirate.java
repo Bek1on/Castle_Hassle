@@ -1,4 +1,4 @@
-public class Pirate extends PlayersClass {
+public class Pirate extends PlayersCharacter {
 
     public Pirate(String name)
     {

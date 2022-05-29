@@ -1,4 +1,4 @@
-public class Ninja extends PlayersClass {
+public class Ninja extends PlayersCharacter {
 
     public Ninja(String name)
     {

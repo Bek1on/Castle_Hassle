@@ -1,21 +1,18 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Scanner;
 
 
-public class CastleGame {
+public class PlaysCastleGame {
     private String[][] castleDisplay;
     private Room[][] castleRooms;
     private int currentfL;
     private int currentRoom;
-    private PlayersClass player;
+    private PlayersCharacter player;
     private PlayerAccount userAccount;
     private int roomsCleared;
 
 
 
-    public CastleGame(PlayerAccount userAccount)
+    public PlaysCastleGame(PlayerAccount userAccount)
     {
         roomsCleared = 0;
         this.userAccount = userAccount;

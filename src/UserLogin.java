@@ -38,7 +38,7 @@ public class UserLogin
     }
 
 
-    public void setUpGUI()
+    public void loadCastleGameClient()
     {
         Container cont = frame.getContentPane();
         FlowLayout flow = new FlowLayout();
@@ -56,7 +56,7 @@ public class UserLogin
     }
 
 
-    public void setUpButtonListeners()
+    public void setUpLoginButtons()
     {
         ActionListener buttonListener = new ActionListener()
         {
@@ -71,7 +71,7 @@ public class UserLogin
                     {
                         frame.setVisible(false);
                         loggedIn = getPlayerAccount(userName);
-                        CastleGame game = new CastleGame(loggedIn);
+                        PlaysCastleGame game = new PlaysCastleGame(loggedIn);
                         game.play();
                         save();
                         System.exit(0);
