@@ -8,4 +8,9 @@ public class Plunderer extends Pirate{
         setAttack(35);
         setEvasive(.4);
     }
+
+    public void useSpecial(Enemy killMe)
+    {
+        System.out.println(getName() + " ");
+    }
 }
