@@ -14,8 +14,8 @@ public class Enemy {
         int randomNames = (int)(Math.random()*10);
         name = enemyAdjectives[randomAdj] + " " + enemyNames[randomNames];
         goldCarried = (int)(Math.random()*41) + 10;
-        defense = (int)(Math.random()*56) + 15;
-        hp = (int)(Math.random()*91) + 30;
+        defense = (int)(Math.random()*26) + 30;
+        hp = (int)(Math.random()*101) + 30;
         evasive = ((int)(Math.random()*11) + 10) / 100.0;
         attackDmg = (int)(Math.random()*21) + 30;
     }
