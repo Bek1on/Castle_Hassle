@@ -8,6 +8,5 @@ public class Enkaku extends Ninja{
         setDefense(25);
         setCritChance(.01);
         setLuck(0);
-
     }
 }

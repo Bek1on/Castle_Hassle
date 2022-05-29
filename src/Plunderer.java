@@ -11,6 +11,9 @@ public class Plunderer extends Pirate{
 
     public void useSpecial(Enemy killMe)
     {
-        System.out.println(getName() + " ");
+        int totalDmg = (int) (((Math.random()*21)+getAttack()) * (100.0 / (100.0 + killMe.getDefense())));
+        int goldGained = (int)(Math.random()*26) + killMe.getGoldCarried();
+        System.out.println(getName() + " used their special, ASSAULT AND ROBBERY! EMPTY YOUR POCKETS " + killMe.getName() + "!");
+        System.out.println(getName() + " dealt " + totalDmg + " damage and stole " + goldGained + " from " + killMe.getName() + "!");
     }
 }

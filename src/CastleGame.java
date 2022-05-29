@@ -19,7 +19,7 @@ public class CastleGame {
     {
         roomsCleared = 0;
         this.userAccount = userAccount;
-        System.out.println("\nWelcome " + userAccount.getUserName() + " ! You've cleared a total of " + userAccount.getRoomsCleared() + " rooms!\n");
+        System.out.println("\nWelcome " + userAccount.getUserName() + "! You've cleared a total of " + userAccount.getRoomsCleared() + " rooms!\n");
         Scanner asker = new Scanner(System.in);
         String difficultyMode = "";
         while(!(difficultyMode.equals("easy") || difficultyMode.equals("normal") || difficultyMode.equals("hard"))) {
@@ -28,7 +28,7 @@ public class CastleGame {
         }
         if(difficultyMode.equals("easy"))
         {
-            int random = (int)(Math.random()*1)+3;
+            int random = 3;
             castleDisplay =  new String[random][random];
             castleRooms = new Room[random][random];
             setCastleRooms();
@@ -38,7 +38,7 @@ public class CastleGame {
         }
         if(difficultyMode.equals("normal"))
         {
-            int random = (int)(Math.random()*2)+3;
+            int random = (int)(Math.random()*3)+3;
             castleDisplay = new String[random][random];
             castleRooms = new Room[random][random];
             setCastleRooms();
@@ -48,7 +48,7 @@ public class CastleGame {
         }
         if(difficultyMode.equals("hard"))
         {
-            int random = (int)(Math.random()*3)+3;
+            int random = (int)(Math.random()*5)+3;
             castleDisplay = new String[random][random];
             castleRooms = new Room[random][random];
             setCastleRooms();

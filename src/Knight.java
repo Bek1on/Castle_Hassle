@@ -12,6 +12,8 @@ public class Knight extends PlayersClass {
     public void useSpecial(Enemy killMe)
     {
         System.out.println(getName() + "used their special, WAR ROAR!\nGRAHHHHHHHHHHH! The enemy has their defense and attack reduced!");
+        killMe.setDefense(killMe.getDefense() - ((int)(Math.random()+21)+5));
+        killMe.setAttackDmg(killMe.getAttackDmg() - ((int)(Math.random()+11)+15));
     }
 
 
