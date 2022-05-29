@@ -38,7 +38,7 @@ public class PlayersClass {
              attackPrompt = name + " attacks!\n";
             double enemyEvadeChance = Math.random();
             int totalDmg = (int) (getAttack() * (100.0 / (100.0 + killMe.getDefense())));
-            if ((1.0 - killMe.getEvasive()) > killMe.getEvasive()) {
+            if ((1.0 - killMe.getEvasive()) > enemyEvadeChance) {
                 double playerCrit = (Math.random());
                 if (getCritChance() >= playerCrit) {
                     totalDmg *= 2;
@@ -86,7 +86,7 @@ public class PlayersClass {
     public void displayStats()
     {
         String display = "Inventory\n";
-        String stats = "Name: " + getName() + "\nHP: " + getHP() + "\nDefense: " + getDefense() + "\nAttack Damage: " + getAttack() + "\nCrit Chance: " + getCritChance() + "\nGold: " + getGold();
+        String stats = "Name: " + getName() + "\nHP: " + getHP() + "\nDefense: " + getDefense() + "\nAttack Damage: " + getAttack() + "\nGold: " + getGold();
         for(int i = 0; i < inventory.size();i++)
         {
             display += "[" + inventory.get(i).getName() + "]";

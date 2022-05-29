@@ -16,7 +16,13 @@ public class Cannoneer extends Pirate{
             int defenseDecrease = (int) (Math.random() * 15) + 2;
             System.out.println(getName() + " uses their special, THE BIG ONE, to whip out a huge cannon and blast " + killMe.getName() + " with it!");
             System.out.println(getName() + " deals " + totalDmg + " damage and " + killMe.getName() + " has their defense decreased by " + defenseDecrease + "!");
-            System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+            if(killMe.getHp() > 0) {
+                System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+            }
+            else
+            {
+                System.out.println("------------------------------");
+            }
         }
         if(whichSpecialIsUsed.equals("primary"))
         {

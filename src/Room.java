@@ -28,28 +28,61 @@ public class Room {
         if(getRoomType().equals(ROOM_TYPES[1])) {
             Scanner asker = new Scanner(System.in);
             Item[] shopsItems = new Item[5];
-            for(int i = 0; i < shopsItems.length;i++)
-            {
-                shopsItems[i] = new Item();
-            }
+            shopsItems[0] = new Item((int)(Math.random()*2));
+            shopsItems[1] = new Item((int)(Math.random()*2) + 2);
+            shopsItems[2] = new Item((int)(Math.random()*2) + 4);
+            shopsItems[3] = new Item((int)(Math.random()*2) + 6);
+            shopsItems[4] = new Item((int)(Math.random()*2) + 8);
             String[] itemNames = new String[5];
             for (int i = 0; i < shopsItems.length; i++) {
                 itemNames[i] = shopsItems[i].getName();
             }
             String input = "";
-            while(!(input.equals("buy") || input.equals("exit")))
+            while(!(input.equals("buy") || input.equals("exit") || input.equals("sell")))
             {
                 System.out.println("WHAT YOU GONNA DO?");
                 System.out.println(Arrays.toString(itemNames));
-                System.out.println("-I'd like to buy something...(say \"buy\" to buy an item)\n-I think I'm good, I'm gonna head out...(say \"exit\" to leave the shop and advance to the next room)");
+                System.out.println("-I'd like to buy something...(say \"buy\" to buy an item)\n-I think I'm good, I'm gonna head out...(say \"exit\" to leave the shop and advance to the next room)\n-I'd like to sell you some of my wares...(say \"sell\" to sell an item in your inventory)");
                 input = asker.nextLine();
+            }
+            if(input.equals("sell"))
+            {
+                if(player.getInventory().size() == 0)
+                {
+                    System.out.println("You got no items to sell!");
+                }
+                else
+                {
+                    String display = "Inventory\n";
+                    String[] inventoryItems = new String[player.getInventory().size()];
+                    for (int i = 0; i < player.getInventory().size(); i++) {
+                        inventoryItems[i] = player.getInventory().get(i).getName();
+                        display += "[" + player.getInventory().get(i).getName() + "]";
+                    }
+                    String soldItem = "";
+                    while(!isInArray(soldItem,inventoryItems)) {
+                        System.out.println("WHATCHU U SELLING BOI???");
+                        System.out.println(display);
+                        soldItem = asker.nextLine();
+                    }
+                    for(int i = 0; i < player.getInventory().size();i++)
+                    {
+                        if(player.getInventory().get(i).getName().equals(soldItem))
+                        {
+                            System.out.println("Thanks for selling me this " + player.getInventory().get(i).getName() + "!");
+                            System.out.println(player.getName() + " received " + player.getInventory().get(i).getPrice() + " gold!");
+                            player.setGold(player.getGold() + player.getInventory().get(i).getPrice());
+                            player.getInventory().remove(i);
+                        }
+                    }
+                }
             }
             if(input.equals("buy")) {
                 String wantedItem = "";
                 while(!isInArray(wantedItem, itemNames))
                 {
                     String prices = "";
-                    System.out.println("WHACHU BUYING!?!\n" + Arrays.toString(itemNames));
+                    System.out.println("WHACHU BUYING!?! CHOOSE WISELY, ONE PURCHASE ONLY, TRAVELER!\n" + Arrays.toString(itemNames));
                     for(int i = 0; i < shopsItems.length;i++)
                     {
                         prices += shopsItems[i].getName() + " Price: " + shopsItems[i].getPrice() + "\n";
@@ -59,7 +92,7 @@ public class Room {
                 }
                 for (int i = 0; i < itemNames.length; i++) {
                     if (itemNames[i].equals(wantedItem) && player.getGold() >= shopsItems[i].getPrice()) {
-                        System.out.println("A WISE CHOICE!");
+                        System.out.println("A WISE CHOICE! CYA LATER!");
                         player.addToInventory(shopsItems[i]);
                         player.setGold(player.getGold() - shopsItems[i].getPrice());
                         break;
@@ -71,12 +104,11 @@ public class Room {
                 }
                 setObjectiveCompleted(true);
             }
-            else
+            if(input.equals("exit"))
             {
                 System.out.println("SEE YA WHENEVER!");
                 setObjectiveCompleted(true);
             }
-
         }
         if(getRoomType().equals(ROOM_TYPES[0]))
         {
@@ -84,18 +116,19 @@ public class Room {
             Enemy fightMe = new Enemy();
             System.out.println(fightMe.getName() + " challenges you to a fight!");
             while(fightMe.getHp() > 0) {
+                if(player.getHP() <= 0)
+                {
+                    break;
+                }
                 String input = "";
                 while (!(input.equals("fight") || input.equals("item") || input.equals("special"))) {
+                    displayStatsAlongSideEachOther(player,fightMe);
                     System.out.println("What's your move?\n-I strike (say \"fight\")\n-I use an item (say \"item\")\n-I use my special (say \"special\")");
                     input = asker.nextLine();
                 }
                 if(input.equals("fight"))
                 {
                     duel(player,fightMe);
-                    if(player.getHP() <= 0)
-                    {
-                        break;
-                    }
                 }
                 if(input.equals("item"))
                 {
@@ -237,8 +270,13 @@ public class Room {
             Boss bigEnemy = new Boss();
             System.out.println("HERE COMES A BOSS! ITS THE " + bigEnemy.getName());
             while(bigEnemy.getHp() > 0) {
+                if(player.getHP() <= 0)
+                {
+                    break;
+                }
                 String input = "";
                 while (!(input.equals("fight") || input.equals("item") || input.equals("special"))) {
+                    displayStatsAlongSideEachOther(player,bigEnemy);
                     System.out.println("What's your move?\n-I strike (say \"fight\")\n-I use an item (say \"item\")\n-I use my special (say \"special\")");
                     input = asker.nextLine();
                 }
@@ -327,7 +365,7 @@ public class Room {
         return objectiveCompleted;
     }
 
-    private boolean isInArray(String userInput, String[] items)
+    private boolean isInArray(String userInput, String[] items) //String inputs
     {
         for(int i = 0; i < items.length;i++)
         {
@@ -338,6 +376,19 @@ public class Room {
         }
         return false;
     }
+
+    private void displayStatsAlongSideEachOther(PlayersClass player, Enemy killMe)
+    {
+        System.out.println("CURRENT STATS");
+        System.out.println(player.getName()  + " CURRENT HP: " + player.getHP());
+        System.out.println(player.getName() + " CURRENT DEFENSE: " + player.getDefense());
+        System.out.println(player.getName() + " CURRENT ATTACK: " + player.getAttack());
+        System.out.println(killMe.getName()  + " CURRENT HP: " + killMe.getHp());
+        System.out.println(killMe.getName() + " CURRENT DEFENSE: " + killMe.getDefense());
+        System.out.println(killMe.getName() + " CURRENT ATTACK: " + killMe.getAttackDmg());
+        System.out.println("------------------------------");
+    }
+
 
 
 

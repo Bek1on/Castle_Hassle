@@ -18,7 +18,13 @@ public class Plunderer extends Pirate{
             setGold(getGold() + goldGained);
             System.out.println(getName() + " used their special, ASSAULT AND ROBBERY! EMPTY YOUR POCKETS " + killMe.getName() + "!");
             System.out.println(getName() + " dealt " + totalDmg + " damage and stole " + goldGained + " gold from " + killMe.getName() + "!");
-            System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+            if(killMe.getHp() > 0) {
+                System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+            }
+            else
+            {
+                System.out.println("------------------------------");
+            }
         }
         if(whichSpecialToUse.equals("primary"))
         {

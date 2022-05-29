@@ -20,6 +20,12 @@ public class Item {
         }
     }
 
+    public Item(int randomItem)
+    {
+        name = ITEMS[randomItem];
+        price = PRICES[(int)(Math.random()*10)];
+    }
+
     public String getName()
     {
         return name;

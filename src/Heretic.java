@@ -20,16 +20,29 @@ public class Heretic extends Knight{
                 attackEnemy(killMe, totalDmg);
                 setHP(getHP() - dmgDealtToSelf);
                 System.out.println(getName() + " dealt " + totalDmg + " damage, but accidentally hurt themselves, losing " + dmgDealtToSelf + " HP!");
-                System.out.println(getName() + " now has " + getHP() + " HP!");
-                System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
-
+                if(getHP() > 0) {
+                    System.out.println(getName() + " now has " + getHP() + " HP!");
+                }
+                if(killMe.getHp() > 0) {
+                    System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+                }
+                else
+                {
+                    System.out.println("------------------------------");
+                }
 
             } else {
                 int healAmt = (int) (Math.random() * dmgDealtToSelf) + 5;
                 setHP(getHP() + healAmt);
                 System.out.println(getName() + " dealt " + totalDmg + " damage and gained " + healAmt + " HP from drinking " + killMe.getName() + "'s blood!");
                 System.out.println(getName() + " now has " + getHP() + " HP!");
-                System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+                if(killMe.getHp() > 0) {
+                    System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+                }
+                else
+                {
+                    System.out.println("------------------------------");
+                }
             }
         }
         if(whichSpecialIsUsed.equals("primary"))

@@ -81,7 +81,6 @@ public class CastleGame {
             for(int c = 0; c < castleRooms[r].length-1;c++)
             {
                 castleRooms[c][r] = new Room((int)(Math.random()*3));
-
             }
             castleRooms[castleRooms[r].length-1][r] = new Room(3);
         }

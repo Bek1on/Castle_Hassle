@@ -21,12 +21,24 @@ public class Ronin extends Ninja{
                 int totalDmg = (int) ((strikeOne + strikeTwo) * (100.0 / (100.0 + killMe.getDefense())));
                 attackEnemy(killMe, totalDmg);
                 System.out.println(getName() + " managed to land two hits on " + killMe.getName() + ", dealing " + (strikeOne + strikeTwo) + " damage!");
-                System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+                if(killMe.getHp() > 0) {
+                    System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+                }
+                else
+                {
+                    System.out.println("------------------------------");
+                }
             } else {
                 int totalDmg = (int) ((strikeOne) * (100.0 / (100.0 + killMe.getDefense())));
-                System.out.println(getName() + " only hit " + killMe.getName() + " once, dealing a measly" + strikeOne + " damage!");
+                System.out.println(getName() + " only hit " + killMe.getName() + " once, dealing a measly " + strikeOne + " damage!");
                 attackEnemy(killMe, totalDmg);
-                System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+                if(killMe.getHp() > 0) {
+                    System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+                }
+                else
+                {
+                    System.out.println("------------------------------");
+                }
             }
         }
         if(whichSpecialToUse.equals("primary"))

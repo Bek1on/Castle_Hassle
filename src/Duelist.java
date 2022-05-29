@@ -15,15 +15,27 @@ public class Duelist extends Knight{
             int totalDmg = (int) (((Math.random() * 11) + getAttack()) * (100.0 / (100.0 + killMe.getDefense())));
             double attackIncreaseChance = Math.random();
             System.out.println(getName() + " used their special, ENEMY'S EDUCATION! Let's see what you can do " + killMe.getName() + "!");
-            if (attackIncreaseChance >= .97) {
+            if (attackIncreaseChance >= .95) {
                 attackEnemy(killMe, totalDmg);
                 setAttack(getAttack() + 5);
                 System.out.println(getName() + " dealt " + totalDmg + " damage and increased their attack damage by 5, WHAT AN EDUCATING BATTLE!");
-                System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+                if(killMe.getHp() > 0) {
+                    System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+                }
+                else
+                {
+                    System.out.println("------------------------------");
+                }
             } else {
                 attackEnemy(killMe, totalDmg);
                 System.out.println(getName() + " dealt " + totalDmg + " damage, but didn't learn anything, HOW DISAPPOINTING!");
-                System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+                if(killMe.getHp() > 0) {
+                    System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+                }
+                else
+                {
+                    System.out.println("------------------------------");
+                }
             }
         }
         if(whichSpecialIsUsed.equals("primary"))

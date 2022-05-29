@@ -13,6 +13,12 @@ public class Pirate extends PlayersClass {
         System.out.println(getName() + " used their special, CANNON BARRAGE! BATHE'EM IN IRON HAHHAHAHAHAHA");
         attackEnemy(killMe,dmgDealt);
         System.out.println(killMe.getName() + " got hit by a bunch of cannonballs and lost " + dmgDealt + " HP!");
-        System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+        if(killMe.getHp() > 0) {
+            System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+        }
+        else
+        {
+            System.out.println("------------------------------");
+        }
     }
 }
