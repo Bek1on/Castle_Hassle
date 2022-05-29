@@ -4,11 +4,18 @@ public class Room {
     private final String[] ROOM_TYPES = {"enemy","shop","treasure","boss"};
     private String roomType;
     private boolean objectiveCompleted;
+    private boolean primarySpecialUsed;
+    private boolean secondarySpecialUsed;
 
     public Room(int chosenTypeIndex)
     {
         objectiveCompleted = false;
         roomType = ROOM_TYPES[chosenTypeIndex];
+        if(roomType.equals("enemy") || roomType.equals("boss"))
+        {
+            primarySpecialUsed = false;
+            secondarySpecialUsed = false;
+        }
     }
 
     public String getRoomType()
@@ -108,6 +115,43 @@ public class Room {
                             itemUsed = asker.nextLine();
                         }
                         player.useItem(itemUsed);
+                        System.out.println("------------------------------");
+                        fightMe.duelWithPlayer(player);
+                    }
+                }
+                if(input.equals("special"))
+                {
+                    String inputForSpecial = "";
+                    while (!(inputForSpecial.equals("primary") || inputForSpecial.equals("secondary")))
+                    {
+                        System.out.println("Which of your special abilities do you wish to use? (say \"primary\" or \"secondary\", you can only use each special ability once a fight)");
+                        inputForSpecial = asker.nextLine();
+                    }
+                    if(inputForSpecial.equals("primary"))
+                    {
+                        if(primarySpecialUsed)
+                        {
+                            System.out.println("You can only use your primary special once a fight!");
+                        }
+                        if(!primarySpecialUsed)
+                        {
+                            player.useSpecial(fightMe,"primary");
+                            fightMe.duelWithPlayer(player);
+                            primarySpecialUsed = true;
+                        }
+                    }
+                    if(inputForSpecial.equals("secondary"))
+                    {
+                        if(secondarySpecialUsed)
+                        {
+                            System.out.println("You can only use your secondary special once a fight!");
+                        }
+                        if(!secondarySpecialUsed)
+                        {
+                            player.useSpecial(fightMe,"secondary");
+                            fightMe.duelWithPlayer(player);
+                            secondarySpecialUsed = true;
+                        }
                     }
                 }
             }
@@ -224,6 +268,43 @@ public class Room {
                             itemUsed = asker.nextLine();
                         }
                         player.useItem(itemUsed);
+                        System.out.println("------------------------------");
+                        bigEnemy.duelWithPlayer(player);
+                    }
+                }
+                if(input.equals("special"))
+                {
+                    String inputForSpecial = "";
+                    while (!(inputForSpecial.equals("primary") || inputForSpecial.equals("secondary")))
+                    {
+                        System.out.println("Which of your special abilities do you wish to use? (say \"primary\" or \"secondary\", you can only use each special ability once a fight)");
+                        inputForSpecial = asker.nextLine();
+                    }
+                    if(inputForSpecial.equals("primary"))
+                    {
+                        if(primarySpecialUsed)
+                        {
+                            System.out.println("You can only use your primary special once a fight!");
+                        }
+                        if(!primarySpecialUsed)
+                        {
+                            player.useSpecial(bigEnemy,"primary");
+                            bigEnemy.duelWithPlayer(player);
+                            primarySpecialUsed = true;
+                        }
+                    }
+                    if(inputForSpecial.equals("secondary"))
+                    {
+                        if(secondarySpecialUsed)
+                        {
+                            System.out.println("You can only use your secondary special once a fight!");
+                        }
+                        if(!secondarySpecialUsed)
+                        {
+                            player.useSpecial(bigEnemy,"secondary");
+                            bigEnemy.duelWithPlayer(player);
+                            secondarySpecialUsed = true;
+                        }
                     }
                 }
             }

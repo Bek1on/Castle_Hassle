@@ -43,7 +43,7 @@ public class Boss extends Enemy{
     @Override
     public void duelWithPlayer(PlayersClass player) {
         double specialAbilityChance = Math.random();
-        if(specialAbilityChance >= .9)
+        if(specialAbilityChance >= .9 && getHp() > 0)
         {
             useSpecial(player);
         }

@@ -10,10 +10,16 @@ public class Tetsu extends Ninja{
         setLuck(0);
     }
 
-    public void useSpecial(Enemy killMe)
+    public void useSpecial(Enemy killMe, String whichSpecialToUse)
     {
-        System.out.println(getName() + " used their special, POCKET SMOKE! Feast your eyes on this," + killMe.getName() + "!");
-        System.out.println(killMe.getName() + " got more sluggish!");
-        killMe.setEvasive(getEvasive() - .1);
+        if(whichSpecialToUse.equals("secondary")) {
+            System.out.println(getName() + " used their special, POCKET SMOKE! Feast your eyes on this," + killMe.getName() + "!");
+            System.out.println(killMe.getName() + " got more sluggish!\n------------------------------");
+            killMe.setEvasive(killMe.getEvasive() - .35);
+        }
+        if(whichSpecialToUse.equals("primary"))
+        {
+            super.useSpecial(killMe,whichSpecialToUse);
+        }
     }
 }

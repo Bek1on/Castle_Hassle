@@ -7,9 +7,12 @@ public class Pirate extends PlayersClass {
         setCritChance(.15);
     }
 
-    public void useSpecial(Enemy killMe)
+    public void useSpecial(Enemy killMe, String whichSpecialToUse)
     {
-        System.out.println(getName() + " used their special, CANNON BARRAGE!\nBATHE'EM IN IRON HAHHAHAHAHAHA");
-        attackEnemy(killMe,(int)(Math.random()+41)+(getAttack()+5));
+        int dmgDealt = (int)(Math.random()+41)+(getAttack() / 2);
+        System.out.println(getName() + " used their special, CANNON BARRAGE! BATHE'EM IN IRON HAHHAHAHAHAHA");
+        attackEnemy(killMe,dmgDealt);
+        System.out.println(killMe.getName() + " got hit by a bunch of cannonballs and lost " + dmgDealt + " HP!");
+        System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
     }
 }

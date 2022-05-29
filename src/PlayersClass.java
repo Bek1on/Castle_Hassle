@@ -64,10 +64,11 @@ public class PlayersClass {
 
     public int getGold(){return gold;}
 
-    public void useSpecial(Enemy killMe)
+    public void useSpecial(Enemy killMe, String whichSpecialIsUsed)
     {
-        System.out.println("I HAVE NO USE"); //<-- always overwritten
+        //IS OVERWRITTEN HAS NO FUNCTION
     }
+
 
     public void setGold(int value) {gold = value;}
 

@@ -6,14 +6,23 @@ public class Plunderer extends Pirate{
         setHP(150);
         setDefense(50);
         setAttack(35);
-        setEvasive(.4);
+        setEvasive(.32);
     }
 
-    public void useSpecial(Enemy killMe)
+    public void useSpecial(Enemy killMe, String whichSpecialToUse)
     {
-        int totalDmg = (int) (((Math.random()*21)+getAttack()) * (100.0 / (100.0 + killMe.getDefense())));
-        int goldGained = (int)(Math.random()*26) + killMe.getGoldCarried();
-        System.out.println(getName() + " used their special, ASSAULT AND ROBBERY! EMPTY YOUR POCKETS " + killMe.getName() + "!");
-        System.out.println(getName() + " dealt " + totalDmg + " damage and stole " + goldGained + " from " + killMe.getName() + "!");
+        if(whichSpecialToUse.equals("secondary")) {
+            int totalDmg = (int) (((Math.random() * 21) + getAttack()) * (100.0 / (100.0 + killMe.getDefense())));
+            int goldGained = (int) (Math.random() * 26) + killMe.getGoldCarried() / 2;
+            attackEnemy(killMe, totalDmg);
+            setGold(getGold() + goldGained);
+            System.out.println(getName() + " used their special, ASSAULT AND ROBBERY! EMPTY YOUR POCKETS " + killMe.getName() + "!");
+            System.out.println(getName() + " dealt " + totalDmg + " damage and stole " + goldGained + " gold from " + killMe.getName() + "!");
+            System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+        }
+        if(whichSpecialToUse.equals("primary"))
+        {
+            super.useSpecial(killMe,whichSpecialToUse);
+        }
     }
 }

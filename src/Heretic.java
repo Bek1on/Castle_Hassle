@@ -8,4 +8,33 @@ public class Heretic extends Knight{
         setLuck(.2);
         setCritChance(0.02);
     }
+
+    public void useSpecial(Enemy killMe, String whichSpecialIsUsed)
+    {
+        if(whichSpecialIsUsed.equals("secondary")) {
+            System.out.println(getName() + " used their special, CRAZED CRUSH! PREPARE TO DIE " + killMe.getName() + "!");
+            int totalDmg = (int) (((Math.random() * 31) + getAttack()) * (100.0 / (100.0 + killMe.getDefense())));
+            int dmgDealtToSelf = totalDmg / 2;
+            double selfHarmChance = Math.random(); //my intentions are not dark, this is basically like that one pokemon move where the pokemon hurts itself from recoil
+            if (selfHarmChance >= .75) {
+                attackEnemy(killMe, totalDmg);
+                setHP(getHP() - dmgDealtToSelf);
+                System.out.println(getName() + " dealt " + totalDmg + " damage, but accidentally hurt themselves, losing " + dmgDealtToSelf + " HP!");
+                System.out.println(getName() + " now has " + getHP() + " HP!");
+                System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+
+
+            } else {
+                int healAmt = (int) (Math.random() * dmgDealtToSelf) + 5;
+                setHP(getHP() + healAmt);
+                System.out.println(getName() + " dealt " + totalDmg + " damage and gained " + healAmt + " HP from drinking " + killMe.getName() + "'s blood!");
+                System.out.println(getName() + " now has " + getHP() + " HP!");
+                System.out.println(killMe.getName() + " now has " + killMe.getHp() + " HP!\n------------------------------");
+            }
+        }
+        if(whichSpecialIsUsed.equals("primary"))
+        {
+            super.useSpecial(killMe,whichSpecialIsUsed);
+        }
+    }
 }
