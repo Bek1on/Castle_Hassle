@@ -24,6 +24,12 @@ public class UserLogin
     private int width;
     private int height;
 
+    public static void main(String[] args) {
+        UserLogin castleGameLogin = new UserLogin(500,500);
+        castleGameLogin.loadCastleGameClient();
+        castleGameLogin.setUpLoginButtons();
+    }
+
     public UserLogin(int w, int h)
     {
         frame = new JFrame();
