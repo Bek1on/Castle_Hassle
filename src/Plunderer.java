@@ -7,6 +7,7 @@ public class Plunderer extends Pirate{
         setDefense(50);
         setAttack(35);
         setEvasive(.32);
+        setSecondarySpecial("ASSAULT AND ROBBERY");
     }
 
     public void useSpecial(Enemy killMe, String whichSpecialToUse)

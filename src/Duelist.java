@@ -7,6 +7,7 @@ public class Duelist extends Knight{
         setEvasive(.25);
         setLuck(0.0);
         setCritChance(0);
+        setSecondarySpecial("ENEMY'S EDUCATION");
     }
 
     public void useSpecial(Enemy killMe, String whichSpecialIsUsed)

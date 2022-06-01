@@ -8,6 +8,7 @@ public class Tetsu extends Ninja{
         setAttack(53);
         setCritChance(0.0);
         setLuck(0);
+        setSecondarySpecial("POCKET SMOKE");
     }
 
     public void useSpecial(Enemy killMe, String whichSpecialToUse)

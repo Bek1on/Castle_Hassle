@@ -7,6 +7,7 @@ public class Archer extends Knight{
         setEvasive(.34);
         setLuck(0.0);
         setCritChance(0);
+        setSecondarySpecial("ARROW TO THE KNEE");
     }
 
     public void useSpecial(Enemy killMe, String whichSpecialIsUsed)

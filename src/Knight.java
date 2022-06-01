@@ -6,6 +6,7 @@ public class Knight extends PlayersCharacter {
         super(name);
         setDefense(85);
         setHP(160);
+        setPrimarySpecial("WAR ROAR");
 
     }
 

@@ -4,6 +4,7 @@ public class Ninja extends PlayersCharacter {
     {
         super(name);
         setEvasive(.5);
+        setPrimarySpecial("FORBIDDEN TECHNIQUE: OBJECT PRODUCTION");
     }
 
     public void useSpecial(Enemy killMe, String whichSpecialToUse) {

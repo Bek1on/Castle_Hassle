@@ -8,12 +8,13 @@ public class Ronin extends Ninja{
         setAttack(55);
         setCritChance(0);
         setLuck(.05);
+        setSecondarySpecial("SENSEI'S GAMBLE");
     }
 
     public void useSpecial(Enemy killMe, String whichSpecialToUse)
     {
         if(whichSpecialToUse.equals("secondary")) {
-            int strikeOne = (int) (Math.random() * 16) + 15;
+            int strikeOne = (int) (Math.random() * 16) + 30;
             int strikeTwo = (int) (Math.random() * getAttack()) + 5;
             double doubleStrikeChance = Math.random();
             System.out.println(getName() + " used their special, SENSEI'S GAMBLE!");

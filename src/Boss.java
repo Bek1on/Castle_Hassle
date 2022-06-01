@@ -23,12 +23,14 @@ public class Boss extends Enemy{
             int healAmt = (int)(Math.random()*31) + 30;
             System.out.println(getName() + " used it's special move, Heal, and healed " + healAmt + " HP!\n------------------------------");
             setHp(getHp() + healAmt);
+            System.out.println(getName() + " now has " + getHp() + " HP!");
         }
         if(bossSpecial.equals("Crunch"))
         {
             int dmgAmt = (int)(Math.random()*31) + 45;
             System.out.println(getName() + " used it's special move, Crunch, to deal " + dmgAmt + " damage!\n------------------------------");
             attackPlayer(player,dmgAmt);
+            System.out.println(player.getName() + " now has" + player.getHP() + " HP!");
         }
         if(bossSpecial.equals("Protein Shake"))
         {

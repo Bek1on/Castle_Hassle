@@ -1,3 +1,4 @@
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.Arrays;
 public class Room {
@@ -125,6 +126,7 @@ public class Room {
                     displayStatsAlongSideEachOther(player,fightMe);
                     System.out.println("What's your move?\n-I strike (say \"fight\")\n-I use an item (say \"item\")\n-I use my special (say \"special\")");
                     input = asker.nextLine();
+                    input = input.toLowerCase(Locale.ROOT);
                 }
                 if(input.equals("fight"))
                 {
@@ -159,6 +161,7 @@ public class Room {
                     {
                         System.out.println("Which of your special abilities do you wish to use? (say \"primary\" or \"secondary\", you can only use each special ability once a fight)");
                         inputForSpecial = asker.nextLine();
+                        inputForSpecial = inputForSpecial.toLowerCase(Locale.ROOT);
                     }
                     if(inputForSpecial.equals("primary"))
                     {
@@ -279,6 +282,7 @@ public class Room {
                     displayStatsAlongSideEachOther(player,bigEnemy);
                     System.out.println("What's your move?\n-I strike (say \"fight\")\n-I use an item (say \"item\")\n-I use my special (say \"special\")");
                     input = asker.nextLine();
+                    input = input.toLowerCase(Locale.ROOT);
                 }
                 if(input.equals("fight"))
                 {
@@ -317,6 +321,7 @@ public class Room {
                     {
                         System.out.println("Which of your special abilities do you wish to use? (say \"primary\" or \"secondary\", you can only use each special ability once a fight)");
                         inputForSpecial = asker.nextLine();
+                        inputForSpecial = inputForSpecial.toLowerCase(Locale.ROOT);
                     }
                     if(inputForSpecial.equals("primary"))
                     {

@@ -8,6 +8,8 @@ public class PlayersCharacter {
     private double luck;
     private double critChance;
     private String name;
+    private String primarySpecial;
+    private String secondarySpecial;
     private ArrayList<Item> inventory;
     private int gold;
 
@@ -65,6 +67,17 @@ public class PlayersCharacter {
     public void useSpecial(Enemy killMe, String whichSpecialIsUsed)
     {
         //IS OVERWRITTEN HAS NO FUNCTION
+    }
+
+
+    public void setPrimarySpecial(String value)
+    {
+        primarySpecial = value;
+    }
+
+    public void setSecondarySpecial(String value)
+    {
+        secondarySpecial = value;
     }
 
 

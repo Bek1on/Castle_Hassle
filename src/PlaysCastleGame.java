@@ -35,7 +35,7 @@ public class PlaysCastleGame {
         }
         if(difficultyMode.equals("normal"))
         {
-            int random = (int)(Math.random()*3)+3;
+            int random = (int)(Math.random()*2)+4;
             castleDisplay = new String[random][random];
             castleRooms = new Room[random][random];
             setCastleRooms();
@@ -45,7 +45,7 @@ public class PlaysCastleGame {
         }
         if(difficultyMode.equals("hard"))
         {
-            int random = (int)(Math.random()*5)+3;
+            int random = (int)(Math.random()*3)+5;
             castleDisplay = new String[random][random];
             castleRooms = new Room[random][random];
             setCastleRooms();

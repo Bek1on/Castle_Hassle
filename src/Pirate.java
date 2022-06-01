@@ -5,6 +5,7 @@ public class Pirate extends PlayersCharacter {
         super(name);
         setLuck(.3);
         setCritChance(.15);
+        setPrimarySpecial("CANNON BARRAGE");
     }
 
     public void useSpecial(Enemy killMe, String whichSpecialToUse)

@@ -7,6 +7,7 @@ public class Heretic extends Knight{
         setEvasive(.3);
         setLuck(.2);
         setCritChance(0.02);
+        setSecondarySpecial("CRAZED CRUSH");
     }
 
     public void useSpecial(Enemy killMe, String whichSpecialIsUsed)
@@ -15,7 +16,7 @@ public class Heretic extends Knight{
             System.out.println(getName() + " used their special, CRAZED CRUSH! PREPARE TO DIE " + killMe.getName() + "!");
             int totalDmg = (int) (((Math.random() * 31) + getAttack()) * (100.0 / (100.0 + killMe.getDefense())));
             int dmgDealtToSelf = totalDmg / 2;
-            double selfHarmChance = Math.random(); //my intentions are not dark, this is basically like that one pokemon move where the pokemon hurts itself from recoil
+            double selfHarmChance = Math.random();
             if (selfHarmChance >= .75) {
                 attackEnemy(killMe, totalDmg);
                 setHP(getHP() - dmgDealtToSelf);

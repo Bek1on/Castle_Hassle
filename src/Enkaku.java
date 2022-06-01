@@ -8,6 +8,7 @@ public class Enkaku extends Ninja{
         setDefense(25);
         setCritChance(.01);
         setLuck(0);
+        setSecondarySpecial("SNIPING SHRED");
     }
 
     public void useSpecial(Enemy killMe, String whichSpecialToUse)

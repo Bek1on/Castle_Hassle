@@ -7,6 +7,7 @@ public class Cannoneer extends Pirate{
         setDefense(35);
         setAttack(60);
         setEvasive(.35);
+        setSecondarySpecial("THE BIG ONE");
     }
 
     public void useSpecial(Enemy killMe, String whichSpecialIsUsed)

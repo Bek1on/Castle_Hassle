@@ -7,6 +7,8 @@ public class Drunkard extends Pirate{
         setDefense(75);
         setAttack(30);
         setEvasive(.05);
+        setSecondarySpecial("CITRUS RUM");
+
     }
 
     public void useSpecial(Enemy killMe,String whichSpecialIsUsed)
@@ -17,7 +19,6 @@ public class Drunkard extends Pirate{
             System.out.println(getName() + " used their special, CITRUS RUM! GLUG GLUG GLUG!");
             System.out.println(getName() + " heals " + hpGained + " HP!");
             System.out.println(getName() + " now has " + getHP() + " HP!\n------------------------------");
-
         }
         if(whichSpecialIsUsed.equals("primary"))
         {
