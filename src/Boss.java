@@ -30,7 +30,7 @@ public class Boss extends Enemy{
             int dmgAmt = (int)(Math.random()*31) + 45;
             System.out.println(getName() + " used it's special move, Crunch, to deal " + dmgAmt + " damage!\n------------------------------");
             attackPlayer(player,dmgAmt);
-            System.out.println(player.getName() + " now has" + player.getHP() + " HP!");
+            System.out.println(player.getName() + " now has " + player.getHP() + " HP!");
         }
         if(bossSpecial.equals("Protein Shake"))
         {
