@@ -4,11 +4,7 @@ public class PlayerAccount {
     private String userName;
     private int roomsCleared;
 
-    public PlayerAccount()
-    {
-        userName = "";
-        roomsCleared = 0;
-    }
+
 
     public PlayerAccount(String userName, int roomsCleared)
     {
